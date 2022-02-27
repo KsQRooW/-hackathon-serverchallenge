@@ -23,13 +23,11 @@ def struturizedata(initialData, params1, params2):
     def addtosearch(*params):
         search = ()
         for temp in params:
-            try:
+            if temp in structName:
                 if temp == 'головка' or temp == 'класс прочности':
                     search += (temp, structName[temp])
                 else:
                     search += (structName[temp],)
-            except KeyError:
-                pass
         return search
 
     structuredData = ()
