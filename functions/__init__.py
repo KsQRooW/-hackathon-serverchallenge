@@ -1,19 +1,26 @@
-from .parse_excel import *
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+from .class_Excel import Excel
+from .class_Browser import Browser
+from .class_Text import Text
+from .class_SearchEngines import Google
+from .class_Logs import Logs
+from .class_Shop import Shop
+from .config import *
 
-ChromeOptions = webdriver.ChromeOptions()
-ChromeOptions.add_argument('headless')
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=ChromeOptions)
+# Парсинг и выгрузка экселя
+excel_input_data = Excel(path_excel_input)
+excel_input_data.importgoods()
+excel_input_data = excel_input_data.structurizedata(params1, params2)
 
-path = 'source/poiskpostav_v1_test.xlsx'                 # Список товаров
-params1 = {'стандарт': 'ГОСТ',                      # Параметры товаров 1 типа
-           'покрытие': 'покрытие',
-           'головка': 'головка',
-           'рабочий вакуум': 'рабочий вакуум'
-           }
-params2 = {'СТАНДАРТ', 'ГОЛОВКА', 'ОБОЗНАЧЕНИЕ',    # Параметры товаров 2 типа
-           'КЛАСС ПРОЧНОСТИ', 'МАТЕРИАЛ', 'ТИП'
-           }
+# Загрузка словаря market_words
+words_cleaner = Text()
+words_cleaner.read_file(path_market_words)
+words_cleaner.normal_form()
+market_words = words_cleaner.word
 
-structuredData = struturizedata(importgoods(path), params1, params2)
+# Инициализация браузера для работы с Google
+google_browser = Google()
+google_browser.driver = path_web_driver
+
+# Инициализация браузера для работы с магазинами
+market_shop_browser = Shop()
+market_shop_browser.driver = path_web_driver

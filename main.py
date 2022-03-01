@@ -1,34 +1,40 @@
-from functions import structuredData, driver
-from functions.parse_google_search import *
+from functions import excel_input_data, market_words, google_browser, market_shop_browser
 from pprint import pprint
-# from datetime import datetime
+from datetime import datetime
 
-# start_time = datetime.now()
-# print(start_time)
-# print('-' * 15)
-
-# pprint(structuredData)
-# print('-' * 15)
-
-market_words = market_words_creater('source/market_words.txt')
 
 products_and_shops = {}
-for element in structuredData:
+time = datetime.now()
 
-    google_link = 'https://www.google.com/search?q=' + element['поиск']
-    links_of_shops = google_links_parse(driver, google_link)
+for element in excel_input_data:
+    # 0) парсинг одной строки из экселя
 
-    # pprint(links_of_shops)
-    # print('-' * 15)
+    for number in range(3):
+        google_link = 'https://www.google.com/search?q=' + element['поиск'] + f"&start={number}0"
+        links_of_shops = google_browser.google_links_parse(google_link)
 
-    for link in links_of_shops:
-        if check_market_or_no(driver, link, market_words, MorphAnalyzer()):
-            if products_and_shops.get(element['поиск'], None):
-                products_and_shops[element['поиск']].add(link)
-            else:
-                products_and_shops.setdefault(element['поиск'], {link})
+        for link in links_of_shops:
 
-    # print(datetime.now() - start_time)
-    # print('-' * 15)
+            # 1) проверка магазин ли это?
+            # 2) домашний адресс
+            # 3) проверка сравнить параметры с экселем?
+            # 4) парсинг ИНН для сайта
+            # 5) парсинг инфы по магазину по ИНН
+            # 6) сохраняем магазин
+
+            market_shop_browser.url = link
+            if market_shop_browser.check_market_or_no(market_words):
+                if products_and_shops.get(element['поиск'], None):
+                    products_and_shops[element['поиск']].add(market_shop_browser.domain)
+                else:
+                    products_and_shops.setdefault(element['поиск'], {market_shop_browser.domain})
+
+
+        # 7) ранжируем магазины для позиции из экселя
+        # 8) выводим на отдельный лист экселя информацию по магазинам для товара
 
 pprint(products_and_shops)
+print(datetime.now() - time)
+
+google_browser.quit()
+market_shop_browser.quit()
