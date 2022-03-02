@@ -2,7 +2,6 @@ from functions import excel_input_data, market_words, google_browser, market_sho
 from pprint import pprint
 from datetime import datetime
 
-
 products_and_shops = {}
 time = datetime.now()
 
@@ -10,13 +9,15 @@ for element in excel_input_data:
     # 0) парсинг одной строки из экселя
 
     for number in range(3):
-        google_link = 'https://www.google.com/search?q=' + element['поиск'] + f"&start={number}0"
-        links_of_shops = google_browser.google_links_parse(google_link)
+        google_browser.google_search(element['поиск'])
+        google_browser.start_page = number
+
+        links_of_shops = google_browser.google_links_parse()
 
         for link in links_of_shops:
 
-            # 1) проверка магазин ли это?
-            # 2) домашний адресс
+            # 1) проверка магазин ли это? +
+            # 2) домашний адресс +
             # 3) проверка сравнить параметры с экселем?
             # 4) парсинг ИНН для сайта
             # 5) парсинг инфы по магазину по ИНН
@@ -29,9 +30,8 @@ for element in excel_input_data:
                 else:
                     products_and_shops.setdefault(element['поиск'], {market_shop_browser.domain})
 
-
-        # 7) ранжируем магазины для позиции из экселя
-        # 8) выводим на отдельный лист экселя информацию по магазинам для товара
+    # 7) ранжируем магазины для позиции из экселя
+    # 8) выводим на отдельный лист экселя информацию по магазинам для товара
 
 pprint(products_and_shops)
 print(datetime.now() - time)

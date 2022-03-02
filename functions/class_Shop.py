@@ -25,7 +25,10 @@ class Shop(Browser):
 
     @staticmethod
     def domain_parser(url):
-        return parse.urlsplit(url).netloc
+        domain = parse.urlsplit(url).netloc
+        if domain[0:3] == 'www':
+            return domain[4:]
+        return domain
 
     def check_market_or_no(self, normal_form_words: set):
         try:
@@ -38,5 +41,6 @@ class Shop(Browser):
         all_text = self.driver.find_element(By.TAG_NAME, 'body').text
         check = Text().word_matches(all_text, normal_form_words)
         if not check:
-            logger.WARNING('Website is not a market', self.url)
+            logger.WARN('Website is not a market', self.url)
         return check
+

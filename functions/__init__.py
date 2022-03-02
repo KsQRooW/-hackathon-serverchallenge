@@ -24,3 +24,5 @@ google_browser.driver = path_web_driver
 # Инициализация браузера для работы с магазинами
 market_shop_browser = Shop()
 market_shop_browser.driver = path_web_driver
+
+print(*excel_input_data, sep='\n')

@@ -29,8 +29,8 @@ class Logs:
         print(self)
         self.clear()
 
-    def WARNING(self, text='', url=''):
-        self.status = 'WARNING'
+    def WARN(self, text='', url=''):
+        self.status = 'WARN'
         self.text = text
         self.url = url
         print(self)
