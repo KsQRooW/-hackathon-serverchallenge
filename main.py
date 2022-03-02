@@ -1,40 +1,44 @@
-from functions import excel_input_data, market_words, google_browser, market_shop_browser
+from functions import excel_input_line_number, excel_input_file, market_words, google_browser, market_shop_browser, params1, params2, num_google_pages
 from pprint import pprint
 from datetime import datetime
 
-products_and_shops = {}
+items_and_shops = {}
 time = datetime.now()
 
-for element in excel_input_data:
-    # 0) парсинг одной строки из экселя
-
-    for number in range(3):
-        google_browser.google_search(element['поиск'])
+for i in range(excel_input_line_number):
+    # Чтение одной строки из эксель файла
+    current_item = excel_input_file.readline().structurizedata(params1, params2)
+    # Три страницы поисковой выдачи
+    pprint(current_item)
+    for number in range(num_google_pages):
+        google_browser.google_search(current_item['поиск'])
         google_browser.start_page = number
-
+        # Получить список ссылок на данной странице гугл
         links_of_shops = google_browser.google_links_parse()
 
         for link in links_of_shops:
-
-            # 1) проверка магазин ли это? +
-            # 2) домашний адресс +
-            # 3) проверка сравнить параметры с экселем?
-            # 4) парсинг ИНН для сайта
-            # 5) парсинг инфы по магазину по ИНН
-            # 6) сохраняем магазин
-
+            # Проверка магазин ли это?
             market_shop_browser.url = link
             if market_shop_browser.check_market_or_no(market_words):
-                if products_and_shops.get(element['поиск'], None):
-                    products_and_shops[element['поиск']].add(market_shop_browser.domain)
-                else:
-                    products_and_shops.setdefault(element['поиск'], {market_shop_browser.domain})
+                abc = 1
+"""
+                # Проверка совпадения параметров из экселя с инф на сайте
+                if market_shop_browser.parameter_matching_excel(current_item['параметры']):
+                    # парсинг ИНН
+                        # парсинг инфы по магазину по ИНН
+                            # сохраняем магазин в словарь
+"""
+                # if items_and_shops.get(current_item['поиск'], None):
+                #     items_and_shops[current_item['поиск']].add(market_shop_browser.domain)
+                # else:
+                #     items_and_shops.setdefault(current_item['поиск'], {market_shop_browser.domain})
 
     # 7) ранжируем магазины для позиции из экселя
     # 8) выводим на отдельный лист экселя информацию по магазинам для товара
 
-pprint(products_and_shops)
+pprint(items_and_shops)
 print(datetime.now() - time)
 
+excel_input_file.close_file()
 google_browser.quit()
 market_shop_browser.quit()
