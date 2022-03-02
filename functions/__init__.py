@@ -7,9 +7,10 @@ from .class_Shop import Shop
 from .config import *
 
 # Парсинг и выгрузка экселя
-excel_input_data = Excel(path_excel_input)
-excel_input_data.importgoods()
-excel_input_data = excel_input_data.structurizedata(params1, params2)
+excel_input_file = Excel(path_excel_input)
+excel_input_line_number = excel_input_file.num_goods
+# excel_input_file.importgoods()
+# excel_input_data = excel_input_file.structurizedata(params1, params2)
 
 # Загрузка словаря market_words
 words_cleaner = Text()
@@ -25,4 +26,4 @@ google_browser.driver = path_web_driver
 market_shop_browser = Shop()
 market_shop_browser.driver = path_web_driver
 
-print(*excel_input_data, sep='\n')
+# print(*excel_input_data, sep='\n')
