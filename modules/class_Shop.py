@@ -1,7 +1,8 @@
-from .class_Browser import Browser, By
+from .class_Browser import Browser
 from .class_Text import Text
 from .class_Logs import logger
 from urllib import parse
+from .config import Blacklist
 
 
 class Shop(Browser):
@@ -30,17 +31,17 @@ class Shop(Browser):
             return domain[4:]
         return domain
 
-    def check_market_or_no(self, normal_form_words: set):
-        try:
-            logger.OK('Connecting to', self.url)
-            self.driver.get(self.url)
-        except Exception as err:
-            logger.FAIL('Connecting to', self.url, type(err))
+    def check_market_or_no(self, normal_form_words: set) -> bool:
+        self.get(self.url)
+
+        if self.domain in Blacklist:
+            logger.WARN('Website in Blacklist', self.url)
             return False
 
-        all_text = self.driver.find_element(By.TAG_NAME, 'body').text
+        # all_text = self.driver.find_element(By.TAG_NAME, 'body').text
+        all_text = self.html.find('body').text
+
         check = Text().word_matches(all_text, normal_form_words)
         if not check:
             logger.WARN('Website is not a market', self.url)
         return check
-

@@ -22,10 +22,18 @@ class Logs:
         print(self)
         self.clear()
 
+    def INFO(self, text='', url=''):
+        self.status = 'INFO'
+        self.text = text
+        self.url = url
+        print(self)
+        self.clear()
+
     def FAIL(self, text='', url='', err=' '):
         self.status = 'FAIL'
         self.text = text
         self.url = url
+        self.err += err + ' '
         print(self)
         self.clear()
 

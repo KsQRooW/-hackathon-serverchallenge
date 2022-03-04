@@ -1,22 +1,73 @@
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
+from .config import headers, proxies
+from .class_Logs import logger
+# from selenium import webdriver
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.common.by import By
+import requests
+from bs4 import BeautifulSoup
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 class Browser:
     def __init__(self):
-        self.__options = webdriver.ChromeOptions()
-        self.__options.add_argument('headless')
-        self.__options.add_argument("–disable-infobars")
-        self.__options.add_argument("–enable-automation")
-        self.__options.add_argument("--disable-notifications")
+        self.__headers = headers
+        self.__proxies = proxies
+        self.__html = BeautifulSoup()
 
-        self.__driver = None
-        self.__waiter = None
+        # self.__requests = requests
+        # self.__BeautifulSoup = BeautifulSoup
 
+        # self.__options = webdriver.ChromeOptions()
+        # self.__options.add_argument('headless')
+        # self.__options.add_argument("–disable-infobars")
+        # self.__options.add_argument("–enable-automation")
+        # self.__options.add_argument("--disable-notifications")
+        #
+        # self.__driver = None
+        # self.__waiter = None
+
+    """
+    @property
+    def BeautifulSoup(self):
+        return self.__BeautifulSoup
+
+    @property
+    def requests(self):
+        return self.__requests
+    """
+    @property
+    def html(self):
+        return self.__html
+
+    @html.setter
+    def html(self, soup):
+        if not isinstance(soup, BeautifulSoup):
+            raise TypeError(f"Передан класс {type(soup)}. Ожидался класс BeautifulSoup.")
+        self.__html = soup
+
+    def html_clear(self):
+        self.html = ''
+
+    def get(self, url):
+        try:
+            logger.INFO('Connecting to', url)
+            # (proxies=proxies)
+            self.html = BeautifulSoup(requests.get(url=url, headers=self.__headers).text, 'html.parser')
+        except Exception as err:
+            logger.WARN('Failed connect to', url)
+            try:
+                logger.INFO('Reconnecting to', url)
+                # (proxies=proxies)
+                self.html = BeautifulSoup(requests.get(url=url, headers=self.__headers, verify=False).text, 'html.parser')
+            except Exception as err:
+                logger.FAIL('Not connected to', url, repr(err))
+        return self.html
+
+    """
     def quit(self):
         self.__driver.quit()
-
+    
     @property
     def driver(self):
         return self.__driver
@@ -35,3 +86,4 @@ class Browser:
             self.__options.add_argument(arg)
         else:
             raise TypeError(f"Передан класс {type(arg)}. Ожидался класс str.")
+    """
