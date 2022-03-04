@@ -1,4 +1,5 @@
-from .config import headers, proxies
+from urllib import parse
+from .config import headers, proxies, Blacklist
 from .class_Logs import logger
 # from selenium import webdriver
 # from selenium.webdriver.support.ui import WebDriverWait
@@ -14,6 +15,8 @@ class Browser:
         self.__headers = headers
         self.__proxies = proxies
         self.__html = BeautifulSoup()
+        self.__domain = None
+        self.__url = None
 
         # self.__requests = requests
         # self.__BeautifulSoup = BeautifulSoup
@@ -37,6 +40,26 @@ class Browser:
         return self.__requests
     """
     @property
+    def url(self):
+        return self.__url
+
+    @url.setter
+    def url(self, url):
+        self.__url = url
+
+    @property
+    def domain(self):
+        self.__domain = Browser.domain_parser(self.url)
+        return self.__domain
+
+    @staticmethod
+    def domain_parser(url):
+        domain = parse.urlsplit(url).netloc
+        if domain[0:3] == 'www':
+            return domain[4:]
+        return domain
+
+    @property
     def html(self):
         return self.__html
 
@@ -50,6 +73,9 @@ class Browser:
         self.html = ''
 
     def get(self, url):
+        if self.domain in Blacklist:
+            logger.WARN('Website in Blacklist', self.url)
+            return None
         try:
             logger.INFO('Connecting to', url)
             # (proxies=proxies)

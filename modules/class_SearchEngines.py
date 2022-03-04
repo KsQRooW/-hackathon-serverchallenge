@@ -7,15 +7,20 @@ import re
 class Google(Browser):
     def __init__(self):
         super().__init__()
-        self.__url = 'https://www.google.com/search?q='
+        self.url = 'https://www.google.com/search?q='
         self.search = ''
         self.__start_page = 0
         self.__start = f"&start={self.start_page}0"
-        self.__final_url = self.__url + self.search + self.__start
+        self.__final_url = self.url + self.search + self.__start
+        self.__description = ''
 
     @property
-    def url(self):
-        return self.__url
+    def description(self):
+        return self.__description
+
+    @description.setter
+    def description(self, text):
+        self.description += text
 
     # Вернуть номер стартовой страницы
     @property
@@ -74,3 +79,32 @@ class Google(Browser):
             else:
                 logger.WARN(f"{check_stop_extensions.group()} file not a website", clear_url)
         return markets_urls
+
+    def __recursion_find(self, s, check=True):
+        divs = s.find_all('div', recursive=False)
+        if divs:
+            if check:  # Для первого прохода по div'ам
+                for div in divs[3:-1]:
+                    if div.find_all_next('a'):
+                        self.__recursion_find(div, False)
+            else:
+                for div in divs:
+                    if div.find_all_next('a'):
+                        self.__recursion_find(div, False)
+        elif s.find_previous('div').find('a', recursive=False) is None:
+            self.description += s.text + ' '
+
+    def parse_google_description(self):
+        self.description = ''
+        divs = self.html.find('body').find('div', {'id': 'main'})
+        self.__recursion_find(divs)
+        return self.description
+
+    """
+    def parse_google_description(self):
+        self.description = ''
+        divs = self.html.find('div', id='main').find_all('div', class_='BNeawe s3v9rd AP7Wnd')
+        for div in divs:
+            if div.next.name is None:
+                self.description += div.text + ' '
+    """

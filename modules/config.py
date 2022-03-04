@@ -9,7 +9,7 @@ proxies = {
             'https': 'https://91.224.62.194:8080'  # https Russia - 20ms
 }
 
-path_excel_input = 'source/poiskpostav_v1_test.xlsx'                 # Список товаров
+path_excel_input = 'source/poiskpostav_v1.xlsx'                 # Список товаров
 
 path_market_words = 'source/market_words.txt'
 
@@ -32,7 +32,8 @@ Blacklist = {
     'gost.ru',
     'gostinfo.ru',
     'standards.ru',
-    'docplayer.com'
+    'docplayer.com',
+    'terracompozit.ru'
 }
 
 # driver = ChromeDriverManager().install()
