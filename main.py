@@ -21,19 +21,20 @@ def main():
 
             for link in links_of_shops:
                 # Проверка магазин ли это?
-                market_shop_browser.url = link
-                if market_shop_browser.check_market_or_no(market_words):
-                    """
-                    # Проверка совпадения параметров из экселя с инф на сайте
-                    if market_shop_browser.parameter_matching_excel(current_item['параметры']):
-                        # парсинг ИНН
-                            # парсинг инфы по магазину по ИНН
-                                # сохраняем магазин в словарь
-                    """
-                    if items_and_shops.get(current_item['поиск'], None):
-                        items_and_shops[current_item['поиск']].add(market_shop_browser.url)
-                    else:
-                        items_and_shops.setdefault(current_item['поиск'], {market_shop_browser.url})
+                if market_shop_browser.get(link):
+                    if market_shop_browser.check_market_or_no(market_words):
+                        """
+                        # Проверка совпадения параметров из экселя с инф на сайте +++
+                        if market_shop_browser.parameter_matching_excel(current_item['параметры']):
+                            # парсинг ИНН
+                                # парсинг инфы по магазину по ИНН
+                                    # сохраняем магазин в словарь
+                        """
+                        if market_shop_browser.check_gost(current_item['параметры']['стандарт']):
+                            if items_and_shops.get(current_item['поиск'], None):
+                                items_and_shops[current_item['поиск']].add(market_shop_browser.url)
+                            else:
+                                items_and_shops.setdefault(current_item['поиск'], {market_shop_browser.url})
 
         # 7) ранжируем магазины для позиции из экселя
         # 8) выводим на отдельный лист экселя информацию по магазинам для товара

@@ -73,21 +73,26 @@ class Browser:
         self.html = ''
 
     def get(self, url):
+        self.url = url
         if self.domain in Blacklist:
             logger.WARN('Website in Blacklist', self.url)
             return None
         try:
             logger.INFO('Connecting to', url)
             # (proxies=proxies)
-            self.html = BeautifulSoup(requests.get(url=url, headers=self.__headers).text, 'html.parser')
+            # timeout=(5, 5) - Время на коннект и чтение страницы соответственно
+            response = requests.get(url=url, headers=self.__headers, timeout=(5, 5))
+            self.html = BeautifulSoup(response.text, 'lxml')
         except Exception as err:
             logger.WARN('Failed connect to', url)
             try:
                 logger.INFO('Reconnecting to', url)
                 # (proxies=proxies)
-                self.html = BeautifulSoup(requests.get(url=url, headers=self.__headers, verify=False).text, 'html.parser')
+                response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=False)
+                self.html = BeautifulSoup(response.text, 'lxml')
             except Exception as err:
                 logger.FAIL('Not connected to', url, repr(err))
+                return None
         return self.html
 
     """
