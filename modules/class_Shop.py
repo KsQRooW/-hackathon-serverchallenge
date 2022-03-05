@@ -23,7 +23,7 @@ class Shop(Browser):
             logger.FAIL('Text not found', self.url, repr(err))
             all_text = ''
 
-        check = Text().reg_find(all_text, parameters)
+        check = Text().reg_find(all_text.lower(), parameters.lower())
         if not check:
             logger.WARN('GOST not found', self.url)
         return check

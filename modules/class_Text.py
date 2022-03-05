@@ -7,7 +7,7 @@ stop_extensions = r'(\.pdf\Z)|(\.xls\Z)|(\.xlsx\Z)|(\.swf\Z)|(\.ps\Z)|(\.dwf\Z)|
                   r'(\.odp\Z)|(\.ods\Z)|(\.odt\Z)|(\.rtf\Z)|(\.svg\Z)|(\.tex\Z)|(\.txt\Z)|' \
                   r'(\.text \Z)|(\.wml\Z)|(\.wap\Z)|(\.xml\Z)'
 
-gost_inn = r'(([Гг][Оо][Сс][Тт]|[Ии][Нн][Нн])\D?\s?\D?\s?\d+)'
+gost_inn = r'((гост|инн|гост р исо)\D?\s?\D?\s?\d+)'
 digits = r'\d+'
 
 
