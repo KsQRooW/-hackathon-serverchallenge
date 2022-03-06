@@ -7,11 +7,12 @@ import re
 class Google(Browser):
     def __init__(self):
         super().__init__()
-        self.url = 'https://www.google.com/search?q='
+        self.general_url = 'https://www.google.com/search?q='
+        self.url = ''
         self.search = ''
         self.__start_page = 0
         self.__start = f"&start={self.start_page}0"
-        self.__final_url = self.url + self.search + self.__start
+        self.__final_url = self.general_url + self.search + self.__start
         self.__description = ''
 
     @property
@@ -38,7 +39,7 @@ class Google(Browser):
     # Отправка поискового запроса в Google
     def google_search(self, text):
         self.search = text
-        connect_url = self.url + self.search + self.__start
+        connect_url = self.general_url + self.search + self.__start
         self.get(connect_url)
 
         # try:
@@ -50,7 +51,7 @@ class Google(Browser):
     # метод поиска текста на сайте, используя встроенные средства Google
     # пример: google_search_text_on_site(ИНН, vk.com) -> запрос в Google: ИНН site:vk.com
     def google_search_text_on_site(self, text, site_domain):
-        connect_url = self.url + text + 'site%3A' + site_domain
+        connect_url = self.general_url + text + 'site%3A' + site_domain
         self.get(connect_url)
 
         # try:

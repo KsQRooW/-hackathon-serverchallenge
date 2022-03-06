@@ -14,8 +14,8 @@ def main():
         # Три страницы поисковой выдачи
         pprint(current_item)
         for number in range(num_google_pages):
-            google_browser.google_search(current_item['поиск'])
             google_browser.start_page = number
+            google_browser.google_search(current_item['поиск'])
             # Получить список ссылок на данной странице гугл
             links_of_shops = google_browser.parse_google_links()
 

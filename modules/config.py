@@ -33,7 +33,8 @@ Blacklist = {
     'gostinfo.ru',
     'standards.ru',
     'docplayer.com',
-    'terracompozit.ru'
+    'terracompozit.ru',
+    'ru.djvu.online'
 }
 
 # driver = ChromeDriverManager().install()
