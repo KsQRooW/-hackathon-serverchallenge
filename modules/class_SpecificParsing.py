@@ -10,8 +10,8 @@ class SpecificParsing(Browser):
         self.website = ''
 
     def find_inn_by_url(self, site):
-        logger.INFO('Start INN search by the site address', self.domain)
         self.website = site
+        logger.INFO('Start INN search by the site address', self.website)
         if self.__find_inn_spark():
             if len(self.inn) == 1:
                 logger.INFO('INN found: ' + ' '.join(self.inn))     #TODO inn from list to int
@@ -21,10 +21,9 @@ class SpecificParsing(Browser):
                 logger.INFO('INN found: ' + ' '.join(self.inn))
 
     # Проверка, содержится ли домен site в списке urls
-    @staticmethod
-    def __is_right_url(urls, site):
+    def __is_right_url(self, urls):
         for temp in urls:
-            if temp.text in (site, 'www.' + site):
+            if self.get_text(temp) in (self.website, 'www.' + self.website):
                 return True
         return False
 
@@ -41,15 +40,15 @@ class SpecificParsing(Browser):
         else:
             for item in list_items:
                 urls = item.find_all('span', class_='highlight')
-                if self.__is_right_url(urls, self.website):
-                    data = item.find('div', class_='code').text.split()
+                if self.__is_right_url(urls):
+                    data = self.get_text(item.find('div', class_='code')).split()
                     i = 0
                     while i < len(data):
                         if data[i] == 'ИНН':
                             self.inn.append(data[i + 1])
                         i += 1
                 else:
-                    logger.WARN('Wrong site', item.find('span', class_='highlight').text)    # debug
+                    logger.WARN('Wrong site', self.get_text(item.find('span', class_='highlight')))    # debug
         return True
 
     def __select_one_inn(self):
