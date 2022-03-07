@@ -33,7 +33,8 @@ class Logs:
         self.status = 'FAIL'
         self.text = text
         self.url = url
-        self.err += err + ' '
+        if err != ' ':
+            self.err += err + ' '
         print(self)
         self.clear()
 
