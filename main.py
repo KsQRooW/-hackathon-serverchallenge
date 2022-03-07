@@ -30,7 +30,11 @@ def main():
                                 # парсинг инфы по магазину по ИНН
                                     # сохраняем магазин в словарь
                         """
+                        # Проверка ГОСТа на сайте
                         if market_shop_browser.check_gost(current_item['параметры']['стандарт']):
+                            # Парсинг ИНН
+                            # descriptions = google_browser.parse_google_description()
+                            # print(descriptions)
                             if items_and_shops.get(current_item['поиск'], None):
                                 items_and_shops[current_item['поиск']].add(market_shop_browser.url)
                             else:

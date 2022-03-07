@@ -1,20 +1,37 @@
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
+# TEST GET INN
 
-ChromeOptions = webdriver.ChromeOptions()
-ChromeOptions.add_argument('headless')
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=ChromeOptions)
+from modules.class_SpecificParsing import SpecificParsing
+
+testData = {
+    'konsulavto.ru',
+    'kmzsibmash.ru',
+    'molotkrep.ru',
+    'metizural.ru',
+    'rosspeckrepeg.ru',
+    'tdm-neva.ru',
+    'xn----jtbaeggiethskfo2f3c.xn--p1ai'
+    'garant-metiz.ru',
+    'metizural.ru',
+    'rosspeckrepeg.ru',
+    'tdm-neva.ru',
+    'www.pulscen.ru',
+    'polimer-prom.kiev.ua',
+    'vysota-17.ru',
+    'allbearing.ru',
+    'bizorg.su',
+    'ecotop-nsk.ru',
+    'prom.ua',
+    'rost-s.ru',
+    'rti-altai.ru',
+    'sibkraspolimer.ru'
+}
+parser = SpecificParsing()
+for url in testData:
+    print('   ', url)
+    print('ИНН:', parser.find_inn_by_url(url))
 
 
-def log(*args, sep=' ', h=''):
-    from datetime import datetime
-    current_datetime = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
-    if h != '':
-        h += ': '
-    print(current_datetime, '\t\t', h.upper(), sep.join(map(str, args)), sep='')
-
-
+"""
 # Поиск ИНН на сайте магазина
 def find_inn_from_site(site):
     googleUrl = 'https://www.google.com/search?as_q=%D0%B8%D0%BD%D0%BD&as_qdr=all&as_sitesearch=' + site + '&as_occt=any&safe=images'
@@ -33,23 +50,19 @@ def find_inn_from_site(site):
 
 # Поиск ИНН по адресу сайта
 def find_inn_by_url(url):
-    """
-        https://spark-interfax.ru/search
-        https://www.kartoteka.ru/
-    """
+        # https://spark-interfax.ru/search
+        # https://www.kartoteka.ru/
     return 0
 
 
 # Поиск ИНН по названию компании
 def find_inn_by_name(name):
-    """
-        https://sbis.ru/contragents
-        https://spark-interfax.ru/search
-        https://www.audit-it.ru/contragent/
-        https://www.kartoteka.ru/
-        https://www.list-org.com/search
-        https://classinform.ru/proverka-kontragenta.html
-    """
+        # https://sbis.ru/contragents
+        # https://spark-interfax.ru/search
+        # https://www.audit-it.ru/contragent/
+        # https://www.kartoteka.ru/
+        # https://www.list-org.com/search
+        # https://classinform.ru/proverka-kontragenta.html
     return 0
 
 
@@ -80,12 +93,4 @@ def checksupplier(suppliers):
             trusted_suppliers += (supplierinfo,)
     return trusted_suppliers
 
-
-test = (
-    {'url': 'konsulavto.ru', 'name': ''},
-    {'url': 'terracompozit.ru', 'name': 'Терракомпозит'},
-    {'url': 'appnn.ru', 'name': 'Агропромподшипник'},
-    {'url': 'mir-krepega.ru', 'name': 'Мир Крепежа'}
-)
-checksupplier(test)
-driver.quit()
+"""
