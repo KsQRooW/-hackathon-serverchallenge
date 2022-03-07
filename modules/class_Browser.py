@@ -42,7 +42,7 @@ class Browser:
     @staticmethod
     def get_text(item):
         try:
-            all_text = item.get_text
+            all_text = item.text
         except Exception as err:
             logger.FAIL('Text not found', item.url, repr(err))
             all_text = ''
