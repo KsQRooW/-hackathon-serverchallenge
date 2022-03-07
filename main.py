@@ -1,5 +1,5 @@
 from modules import excel_input_line_number, excel_input_file, market_words, google_browser, market_shop_browser, \
-    params1, params2, num_google_pages
+    params1, params2, num_google_pages, org_types
 from pprint import pprint
 from datetime import datetime
 
@@ -35,6 +35,7 @@ def main():
                             # Парсинг ИНН
                             # descriptions = google_browser.parse_google_description()
                             # print(descriptions)
+                            print(market_shop_browser.name_company_find(org_types))
                             if items_and_shops.get(current_item['поиск'], None):
                                 items_and_shops[current_item['поиск']].add(market_shop_browser.url)
                             else:

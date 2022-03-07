@@ -13,7 +13,7 @@ path_excel_input = 'source/poiskpostav_v1_test.xlsx'                 # Спис�
 
 path_market_words = 'source/market_words.txt'
 
-path_web_driver = 'source/chromedriver.exe'
+path_org_types = 'source/org_types.txt'
 
 params1 = {'стандарт': 'ГОСТ',                      # Параметры товаров 1 типа
            'покрытие': 'покрытие',
@@ -33,8 +33,6 @@ Blacklist = {
     'gostinfo.ru',
     'standards.ru',
     'docplayer.com',
-    'terracompozit.ru',
-    'ru.djvu.online'
+    'ru.djvu.online',
+    'avito.ru'
 }
-
-# driver = ChromeDriverManager().install()

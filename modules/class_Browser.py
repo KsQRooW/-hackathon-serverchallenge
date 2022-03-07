@@ -39,6 +39,15 @@ class Browser:
     def requests(self):
         return self.__requests
     """
+    @staticmethod
+    def text(item):
+        try:
+            all_text = item.text
+        except Exception as err:
+            logger.FAIL('Text not found', item.url, repr(err))
+            all_text = ''
+        return all_text
+
     @property
     def url(self):
         return self.__url
@@ -49,6 +58,8 @@ class Browser:
 
     @property
     def domain(self):
+        if not self.url:
+            raise Exception("URL is None type. Use .get or .url")
         self.__domain = Browser.domain_parser(self.url)
         return self.__domain
 

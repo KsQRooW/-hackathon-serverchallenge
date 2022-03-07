@@ -13,11 +13,15 @@ excel_input_line_number = excel_input_file.num_goods
 # excel_input_file.importgoods()
 # excel_input_data = excel_input_file.structurizedata(params1, params2)
 
+text = Text()
 # Загрузка словаря market_words
-words_cleaner = Text()
-words_cleaner.read_file(path_market_words)
-words_cleaner.normal_form()
-market_words = words_cleaner.word
+text.read_file(path_market_words)
+text.normal_form()
+market_words = text.word
+
+# Загрузка словаря с типом юр. компаний
+text.read_file(path_org_types)
+org_types = text.word
 
 # Инициализация браузера для работы с Google
 google_browser = Google()

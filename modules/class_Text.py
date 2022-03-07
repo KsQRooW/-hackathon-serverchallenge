@@ -7,7 +7,7 @@ stop_extensions = r'(\.pdf\Z)|(\.xls\Z)|(\.xlsx\Z)|(\.swf\Z)|(\.ps\Z)|(\.dwf\Z)|
                   r'(\.odp\Z)|(\.ods\Z)|(\.odt\Z)|(\.rtf\Z)|(\.svg\Z)|(\.tex\Z)|(\.txt\Z)|' \
                   r'(\.text \Z)|(\.wml\Z)|(\.wap\Z)|(\.xml\Z)'
 
-gost_inn = r'((гост|инн|гост р исо)\D?\s?\D?\s?\d+)'
+gost_inn = r'((?:гост|инн|гост р исо)\D?\s?\D?\s?\d+)'
 digits = r'\d+'
 
 
@@ -84,14 +84,35 @@ class Text:
                 self.word.add(line.lower().strip())
 
     @staticmethod
-    def reg_find(text, parameters):
+    def gost_inn_find(text, parameters):
         on_site = re.findall(gost_inn, text)
         try:
-            digits_on_site = list(map(lambda x: re.search(digits, x[0]).group(), on_site))
-        except Exception:
-            digits_on_site = []
-        our = re.search(gost_inn, parameters).group()
-        digits_our = re.search(digits, our).group()
-        if digits_our in digits_on_site:
+            digits_on_site = set(map(lambda x: re.search(digits, x).group(), on_site))
+        except AttributeError:
+            digits_on_site = set()
+        our = re.findall(gost_inn, parameters)
+        digits_our = set(map(lambda x: re.search(digits, x).group(), our))
+        if digits_on_site.intersection(digits_our):
             return True
         return False
+
+    @staticmethod
+    def name_find(text, org_types):
+        names = set()
+        for type_ in org_types:
+            reg1 = fr'{type_}\D?\s?\D?\s?\w*\D?\s?\D?\s?["«].+["»]'
+            try:
+                reg_found = re.search(reg1, text).group()
+            except AttributeError:
+                reg_found = None
+            if reg_found:
+                first_quot = reg_found.find('"') + 1
+                if first_quot:
+                    last_quot = reg_found.rfind('"')
+                else:
+                    first_quot = reg_found.find('«') + 1
+                    last_quot = reg_found.rfind('»')
+                word = reg_found[first_quot:last_quot]
+                clear_name = re.findall(r'\w+\b', word)
+                names.add(' '.join(clear_name))
+        return names
