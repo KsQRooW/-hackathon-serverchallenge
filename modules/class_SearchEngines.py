@@ -93,7 +93,7 @@ class Google(Browser):
                     if div.find_all_next('a'):
                         self.__recursion_find(div, False)
         elif s.find_previous('div').find('a', recursive=False) is None:
-            self.description += s.text + ' '
+            self.description += s.get_text + ' '
 
     def parse_google_description(self):
         self.description = ''

@@ -24,7 +24,7 @@ class SpecificParsing(Browser):
     @staticmethod
     def __is_right_url(urls, site):
         for temp in urls:
-            if temp.text in (site, 'www.' + site):
+            if temp.get_text in (site, 'www.' + site):
                 return True
         return False
 
@@ -42,14 +42,14 @@ class SpecificParsing(Browser):
             for item in list_items:
                 urls = item.find_all('span', class_='highlight')
                 if self.__is_right_url(urls, self.website):
-                    data = item.find('div', class_='code').text.split()
+                    data = item.find('div', class_='code').get_text.split()
                     i = 0
                     while i < len(data):
                         if data[i] == 'ИНН':
                             self.inn.append(data[i + 1])
                         i += 1
                 else:
-                    logger.WARN('Wrong site', item.find('span', class_='highlight').text)    # debug
+                    logger.WARN('Wrong site', item.find('span', class_='highlight').get_text)    # debug
         return True
 
     def __select_one_inn(self):
