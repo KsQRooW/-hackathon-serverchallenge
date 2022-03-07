@@ -1,3 +1,4 @@
+import re
 from string import punctuation
 from pymorphy3 import MorphAnalyzer
 
@@ -5,6 +6,9 @@ stop_extensions = r'(\.pdf\Z)|(\.xls\Z)|(\.xlsx\Z)|(\.swf\Z)|(\.ps\Z)|(\.dwf\Z)|
                   r'(\.kmz\Z)|(\.gpx\Z)|(\.hwp\Z)|(\.ppt\Z)|(\.pptx\Z)|(\.doc\Z)|(\.docx\Z)|' \
                   r'(\.odp\Z)|(\.ods\Z)|(\.odt\Z)|(\.rtf\Z)|(\.svg\Z)|(\.tex\Z)|(\.txt\Z)|' \
                   r'(\.text \Z)|(\.wml\Z)|(\.wap\Z)|(\.xml\Z)'
+
+gost_inn = r'((гост|инн|гост р исо)\D?\s?\D?\s?\d+)'
+digits = r'\d+'
 
 
 class Text:
@@ -47,7 +51,10 @@ class Text:
     # Приведение слова к нормальной форме (лемматизация)
     def normal_form(self):
         if isinstance(self.word, str):
-            self.word = self.analyzer.normal_forms(self.word)[0]
+            try:
+                self.word = self.analyzer.normal_forms(self.word)[0]
+            except Exception:
+                self.word = ''
         elif isinstance(self.word, set):
             result = set()
             for one_word in self.word:
@@ -76,3 +83,15 @@ class Text:
             for line in file:
                 self.word.add(line.lower().strip())
 
+    @staticmethod
+    def reg_find(text, parameters):
+        on_site = re.findall(gost_inn, text)
+        try:
+            digits_on_site = list(map(lambda x: re.search(digits, x[0]).group(), on_site))
+        except Exception:
+            digits_on_site = []
+        our = re.search(gost_inn, parameters).group()
+        digits_our = re.search(digits, our).group()
+        if digits_our in digits_on_site:
+            return True
+        return False
