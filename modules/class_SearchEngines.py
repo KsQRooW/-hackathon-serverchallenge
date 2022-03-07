@@ -21,7 +21,7 @@ class Google(Browser):
 
     @description.setter
     def description(self, text):
-        self.description += text
+        self.__description = text
 
     # Вернуть номер стартовой страницы
     @property
