@@ -14,7 +14,7 @@ testData = {
     'metizural.ru',
     'rosspeckrepeg.ru',
     'tdm-neva.ru',
-    'www.pulscen.ru',
+    'pulscen.ru',
     'polimer-prom.kiev.ua',
     'vysota-17.ru',
     'allbearing.ru',
@@ -28,7 +28,7 @@ testData = {
 parser = SpecificParsing()
 for url in testData:
     print('   ', url)
-    print('ИНН:', parser.find_inn_by_url(url))
+    print('   ИНН:', parser.find_inn_by_url(url))
 
 
 """

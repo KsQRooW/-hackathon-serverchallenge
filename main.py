@@ -1,5 +1,5 @@
 from modules import excel_input_line_number, excel_input_file, market_words, google_browser, market_shop_browser, \
-    params1, params2, num_google_pages, org_types
+    params1, params2, num_google_pages, supplier_browser
 from pprint import pprint
 from datetime import datetime
 
@@ -35,11 +35,13 @@ def main():
                             # Парсинг ИНН
                             # descriptions = google_browser.parse_google_description()
                             # print(descriptions)
-                            print(market_shop_browser.name_company_find(org_types))
-                            if items_and_shops.get(current_item['поиск'], None):
-                                items_and_shops[current_item['поиск']].add(market_shop_browser.url)
-                            else:
-                                items_and_shops.setdefault(current_item['поиск'], {market_shop_browser.url})
+                            # Поиск ИНН по адресу сайта
+                            inn = supplier_browser.find_inn_by_url(market_shop_browser.domain)
+                            if inn:
+                                if items_and_shops.get(current_item['поиск'], None):
+                                    items_and_shops[current_item['поиск']].add(market_shop_browser.url)
+                                else:
+                                    items_and_shops.setdefault(current_item['поиск'], {market_shop_browser.url})
 
         # 7) ранжируем магазины для позиции из экселя
         # 8) выводим на отдельный лист экселя информацию по магазинам для товара
