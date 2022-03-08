@@ -105,8 +105,116 @@ class Supplier(Browser):
 
     def parse_supplier_data(self):
         self.__supplier_data = {}
-        self.__supplier_data['ИНН'] = self.inn
-        # TODO parse https://sbis.ru/contragents/
+        general_url = 'https://sbis.ru/contragents/'
+        url = general_url + self.inn
+        self.get(url, time=1)
+        # Проверка действующая ли компания или нет
+        liquidated = self.get_text(self.html.find('div', class_='c-sbisru-CardStatus__closed'), log=False)
+        if liquidated:
+            logger.FAIL('Supplier liquidated!')
+            return False
+        else:
+            self.__supplier_data['Статус'] = 'Действующее'
+            # Парсинг
+            self.__supplier_data['ИНН'] = self.inn
+            self.__supplier_data['Сайт'] = self.website
+            # Дата регистрации
+            inf = self.get_text(self.html.find('div', class_='cCard__CompanyDescription'), log=False)
+            try:
+                strdate = re.search(r'Действует с \d\d.\d\d.\d\d\d\d', inf).group()[12:]                    # TODO добавить КПП, ОГРН, ОКПО
+            except Exception as er:
+                logger.FAIL('Date not found', err=repr(er))
+                strdate = ''
+            self.__supplier_data['Дата регистрации'] = strdate
+            #
+            self.__supplier_data['Название'] = self.get_text(
+                self.html.find('div', class_='cCard__MainReq-Name'), log=False
+            )
+            self.__supplier_data['Название полное'] = self.get_text(
+                self.html.find('div', class_='cCard__MainReq-FullName'), log=False
+            )
+            self.__supplier_data['Руководитель'] = self.get_text(
+                self.html.find('div', class_='cCard__Director-Name').find('span'), log=False
+            ).strip()
+            self.__supplier_data['Адрес'] = self.get_text(
+                self.html.find('div', class_='cCard__Contacts-Address'), log=False
+            ).strip()
+            self.__supplier_data['Выручка'] = self.get_text(
+                self.html.find(
+                    'div', class_='cCard__Contacts'
+                ).find(
+                    'div', class_='cCard__Contacts-Revenue-Desktop cCard__Main-Grid-Element'
+                ).find('span', class_='cCard__BlockMaskSum'),
+                log=False
+            ).strip()
+            self.__supplier_data['Прибыль'] = self.get_text(
+                self.html.find(
+                    'div', class_='cCard__Owners-Profit-Desktop cCard__Main-Grid-Element'
+                ).find('span', class_='cCard__BlockMaskSum'),
+                log=False
+            ).strip()
+            # Суды
+            try:
+                self.__supplier_data['Истец'] = {}
+                self.__supplier_data['Истец']['Выиграл'] = self.get_text(
+                    self.html.find('div', class_='cCard__Owners-CourtStat-Complain').find(
+                        'div', class_='cCard__Owners-CourtStat-Stat-Win'
+                    ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
+                    log=False
+                ).strip()
+                self.__supplier_data['Истец']['Проиграл'] = self.get_text(
+                    self.html.find('div', class_='cCard__Owners-CourtStat-Complain').find(
+                        'div', class_='cCard__Owners-CourtStat-Stat-Loose'
+                    ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
+                    log=False
+                ).strip()
+                self.__supplier_data['Истец']['Прочие'] = self.get_text(
+                    self.html.find('div', class_='cCard__Owners-CourtStat-Complain').find(
+                        'div', class_='cCard__Owners-CourtStat-Stat-Other'
+                    ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Истец'] = ''
+            #
+            try:
+                self.__supplier_data['Ответчик'] = {}
+                self.__supplier_data['Ответчик']['Выиграл'] = self.get_text(
+                    self.html.find('div', class_='cCard__Owners-CourtStat-Defend').find(
+                        'div', class_='cCard__Owners-CourtStat-Stat-Win'
+                    ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
+                    log=False
+                ).strip()
+                self.__supplier_data['Ответчик']['Проиграл'] = self.get_text(
+                    self.html.find('div', class_='cCard__Owners-CourtStat-Defend').find(
+                        'div', class_='cCard__Owners-CourtStat-Stat-Loose'
+                    ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
+                    log=False
+                ).strip()
+                self.__supplier_data['Ответчик']['Прочие'] = self.get_text(
+                    self.html.find('div', class_='cCard__Owners-CourtStat-Defend').find(
+                        'div', class_='cCard__Owners-CourtStat-Stat-Other'
+                    ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Ответчик'] = ''
+            #
+            self.__supplier_data['Уставный капитал'] = self.get_text(
+                self.html.find(
+                    'div', class_='cCard__Owners-OwnerList-Authorized-Capital-Sum cCard__Owners-OwnerList-Bold'
+                ),
+                log=False
+            )
+            self.__supplier_data['Стоимость'] = self.get_text(
+                self.html.find(
+                    'div', class_='cCard__Reliability-Cost-Desktop cCard__Main-Grid-Element'
+                ).find('span', class_='cCard__BlockMaskSum'),
+                log=False
+            ).strip()
+            # TODO Торги и госконтракты, Надежность, КПП, ОГРН
+
+            # TODO отзывы
         return True
 
 """
