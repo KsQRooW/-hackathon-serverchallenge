@@ -6,7 +6,7 @@ import re
 from datetime import datetime
 
 
-class SpecificParsing(Browser):
+class Supplier(Browser):
 
     def __init__(self):
         super().__init__()

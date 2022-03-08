@@ -1,6 +1,6 @@
 # TEST GET INN
 
-from modules.class_SpecificParsing import SpecificParsing
+from modules.class_Supplier import Supplier
 
 testData = {
     'tdm-neva.ru',
@@ -9,6 +9,6 @@ testData = {
     'rost-s.ru',
     'sibkraspolimer.ru'
 }
-parser = SpecificParsing()
+parser = Supplier()
 for url in testData:
     parser.find_inn_by_url(url)

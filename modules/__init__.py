@@ -5,7 +5,7 @@ from .class_SearchEngines import Google
 from .class_Logs import Logs
 from .class_Shop import Shop
 from .config import *
-from .class_SpecificParsing import SpecificParsing
+from .class_Supplier import Supplier
 
 
 # Парсинг и выгрузка экселя
@@ -33,4 +33,4 @@ market_shop_browser = Shop()
 # market_shop_browser.driver = path_web_driver
 
 # Инициализация браузера для поиска информации по поставщику
-supplier_browser = SpecificParsing()
+supplier_browser = Supplier()
