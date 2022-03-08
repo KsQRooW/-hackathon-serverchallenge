@@ -13,10 +13,15 @@ class Supplier(Browser):
         self.__list_inn = []
         self.__inn = ''
         self.website = ''
+        self.__supplier_data = {}
 
     @property
     def inn(self):
         return self.__inn
+
+    @inn.setter
+    def inn(self, inn):
+        self.__inn = inn
 
     # Поиск ИНН по адресу сайта
     def find_inn_by_url(self, site):
@@ -94,6 +99,15 @@ class Supplier(Browser):
             logger.FAIL('INN not found in database spark-interfax')
             return False
 
+    @property
+    def supplier_data(self):
+        return self.__supplier_data
+
+    def parse_supplier_data(self):
+        self.__supplier_data = {}
+        self.__supplier_data['ИНН'] = self.inn
+        # TODO parse https://sbis.ru/contragents/
+        return True
 
 """
 Поиск ИНН по названию компании

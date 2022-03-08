@@ -35,12 +35,17 @@ def main():
                             # Парсинг ИНН
                             # descriptions = google_browser.parse_google_description()
                             # print(descriptions)
+                            # TODO если найден ИНН на сайте, сохранить в supplier_browser.inn, иначе
                             # Поиск ИНН по адресу сайта
                             if supplier_browser.find_inn_by_url(market_shop_browser.domain):
-                                if items_and_shops.get(current_item['поиск'], None):
-                                    items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
-                                else:
-                                    items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
+                                # Парсинг информации по поставщику
+                                if supplier_browser.parse_supplier_data():
+                                    # Сохранение информации по поставщику
+                                    # TODO сохранение из supplier_browser.supplier_data
+                                    if items_and_shops.get(current_item['поиск'], None):
+                                        items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
+                                    else:
+                                        items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
 
         # 7) ранжируем магазины для позиции из экселя
         # 8) выводим на отдельный лист экселя информацию по магазинам для товара
