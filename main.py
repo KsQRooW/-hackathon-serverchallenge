@@ -1,5 +1,5 @@
 from modules import excel_input_line_number, excel_input_file, market_words, google_browser, market_shop_browser, \
-    params1, params2, num_google_pages, supplier_browser, excel_file
+    params1, params2, num_google_pages, supplier_browser
 from pprint import pprint
 from datetime import datetime
 
@@ -13,12 +13,12 @@ def main():
         current_item = excel_input_file.readline().structurizedata(params1, params2)
         # Три страницы поисковой выдачи
         pprint(current_item)
+        markets_ranked = []
         for number in range(num_google_pages):
             google_browser.start_page = number
             google_browser.google_search(current_item['поиск'])
             # Получить список ссылок на данной странице гугл
             links_of_shops = google_browser.parse_google_links()
-
             for link in links_of_shops:
                 # Проверка магазин ли это?
                 if market_shop_browser.get(link):
@@ -38,12 +38,16 @@ def main():
                                 # Сохранение информации по поставщику
                                 # TODO сохранение из supplier_browser.supplier_data
                                 pprint(supplier_browser.supplier_data)
+                                # Присвоения ранга магазину
+                                supplier_browser.ranking()
+                                markets_ranked.append(supplier_browser.supplier_data)
                                 # TODO add market_shop_browser.url
                                 if items_and_shops.get(current_item['поиск'], None):
                                     items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
                                 else:
                                     items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
-
+        markets_ranked.sort(key=lambda x: x['RANK'], reverse=True)
+        pprint(markets_ranked)
         # 7) ранжируем магазины для позиции из экселя
         # 8) выводим на отдельный лист экселя информацию по магазинам для товара
 

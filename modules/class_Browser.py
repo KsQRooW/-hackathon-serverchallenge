@@ -11,6 +11,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 class Browser:
     def __init__(self):
         self.__headers = headers.copy()
+        self.__headers.pop('Cookie')
         self.__proxies = proxies.copy()
         self.__html = BeautifulSoup()
         self.__domain_has = False

@@ -100,6 +100,64 @@ class Supplier(Browser):
             logger.FAIL('INN not found in database spark-interfax')
             return False
 
+    def ranking(self, koefs=None):
+        keys = ('Госконтракты', 'Истец', 'Надежность', 'Ответчик', 'Прибыль', 'Уставный капитал', 'Тендер', 'Выручка', 'Стоимость')
+        if koefs:
+            coefs = koefs
+        else:
+            coefs = [10, 1, 2, 1, 0.5, 0.5, 10, 0.1, 0.1]
+        sokr = {'млн ₽': 1000000, 'тыс ₽': 1000, 'млрд ₽': 1000000000}
+        rating = 0
+        if self.__supplier_data['Госконтракты'] != '':
+            rating += int(self.__supplier_data['Госконтракты']) * coefs[0]
+        if self.__supplier_data['Истец'] != '':
+            win = self.__supplier_data['Истец']['Выиграл'][:-1]
+            lose = self.__supplier_data['Истец']['Проиграл'][:-1]
+            if win != '':
+                if lose != '':
+                    rating += int(win) / int(lose) * coefs[1]
+                else:
+                    rating += int(win) * coefs[1]
+            elif lose != '':
+                rating -= int(lose) * coefs[1]
+        if self.__supplier_data['Надежность']['Минусы'] != '':
+            rating -= float(self.__supplier_data['Надежность']['Минусы'][2:]) * coefs[2]
+        if self.__supplier_data['Надежность']['Плюсы'] != '':
+            rating += float(self.__supplier_data['Надежность']['Плюсы'][2:]) * coefs[2]
+        if self.__supplier_data['Ответчик'] != '':
+            win = self.__supplier_data['Ответчик']['Выиграл'][:-1]
+            lose = self.__supplier_data['Ответчик']['Проиграл'][:-1]
+            if win != '':
+                if lose != '':
+                    rating += int(win) / int(lose) * coefs[3]
+                else:
+                    rating += int(win) * coefs[3]
+            elif lose != '':
+                rating -= int(lose) * coefs[1]
+        if self.__supplier_data['Прибыль'] != '':
+            key = re.search(r'млн ₽|тыс ₽|млрд ₽', self.__supplier_data['Прибыль']).group()
+            value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Прибыль'])
+            rating += sokr[key] * float(value) * coefs[4]
+        if self.__supplier_data['Уставный капитал'] != '':
+            key = re.search(r'млн ₽|тыс ₽|млрд ₽', self.__supplier_data['Прибыль']).group()
+            value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Прибыль'])
+            rating += sokr[key] * float(value) * coefs[5]
+        if self.__supplier_data['Тендер'] != '':
+            win = self.__supplier_data['Тендер']['выиграл']
+            just = self.__supplier_data['Тендер']['участник']
+            if win != '':
+                if just != '':
+                    rating += int(win) / int(just) * coefs[6]
+        if self.__supplier_data['Выручка'] != '':
+            key = re.search(r'млн ₽|тыс ₽|млрд ₽', self.__supplier_data['Выручка']).group()
+            value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Выручка'])
+            rating += sokr[key] * float(value) * coefs[7]
+        if self.__supplier_data['Стоимость'] != '':
+            key = re.search(r'млн ₽|тыс ₽|млрд ₽', self.__supplier_data['Стоимость']).group()
+            value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Стоимость'])
+            rating += sokr[key] * float(value) * coefs[8]
+        self.__supplier_data['RANK'] = rating
+
     @property
     def supplier_data(self):
         return self.__supplier_data
