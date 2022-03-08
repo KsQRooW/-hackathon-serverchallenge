@@ -36,12 +36,11 @@ def main():
                             # descriptions = google_browser.parse_google_description()
                             # print(descriptions)
                             # Поиск ИНН по адресу сайта
-                            inn = supplier_browser.find_inn_by_url(market_shop_browser.domain)
-                            if inn:
+                            if supplier_browser.find_inn_by_url(market_shop_browser.domain):
                                 if items_and_shops.get(current_item['поиск'], None):
-                                    items_and_shops[current_item['поиск']].add(market_shop_browser.url)
+                                    items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
                                 else:
-                                    items_and_shops.setdefault(current_item['поиск'], {market_shop_browser.url})
+                                    items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
 
         # 7) ранжируем магазины для позиции из экселя
         # 8) выводим на отдельный лист экселя информацию по магазинам для товара

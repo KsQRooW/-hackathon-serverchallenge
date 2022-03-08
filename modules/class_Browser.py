@@ -40,11 +40,12 @@ class Browser:
         return self.__requests
     """
     @staticmethod
-    def get_text(item):
+    def get_text(item, log=True):
         try:
             all_text = item.text
         except Exception as err:
-            logger.FAIL('Text not found', item.url, repr(err))
+            if log:
+                logger.FAIL('Text not found', item.url, repr(err))
             all_text = ''
         return all_text
 
