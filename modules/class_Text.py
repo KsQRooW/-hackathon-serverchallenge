@@ -8,7 +8,7 @@ stop_extensions = r'(\.pdf\Z)|(\.xls\Z)|(\.xlsx\Z)|(\.swf\Z)|(\.ps\Z)|(\.dwf\Z)|
                   r'(\.text \Z)|(\.wml\Z)|(\.wap\Z)|(\.xml\Z)'
 
 gost = r'((?:гост|гост р исо|din)\D?\s?\D?\s?\d+)'
-inn = r'инн\D?\s?\D?\s?\d+'
+inn = r'инн\D?\s?\D?\s?\d{10,12}'
 digits = r'\d+'
 
 
@@ -101,7 +101,7 @@ class Text:
     def name_find(text, org_types):
         names = set()
         for type_ in org_types:
-            reg = fr'{type_}\D?\s?\D?\s?\w*\D?\s?\D?\s?["«].+["»]'
+            reg = fr'{type_}\D?\s?\D?\s?\w*\D?\s?\D?\s?["«][^"»]+["»]'
             try:
                 reg_found = re.search(reg, text).group()
             except AttributeError:

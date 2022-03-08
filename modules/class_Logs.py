@@ -38,10 +38,12 @@ class Logs:
         print(self)
         self.clear()
 
-    def WARN(self, text='', url=''):
+    def WARN(self, text='', url='', err=' '):
         self.status = 'WARN'
         self.text = text
         self.url = url
+        if err != ' ':
+            self.err += err + ' '
         print(self)
         self.clear()
 

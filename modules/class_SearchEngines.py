@@ -1,6 +1,7 @@
 from .class_Browser import Browser
 from .class_Logs import logger
 from .class_Text import stop_extensions, inn, digits
+from .config import headers
 import re
 
 
@@ -14,6 +15,7 @@ class Google(Browser):
         self.__start = f"&start={self.start_page}0"
         self.__final_url = self.general_url + self.search + self.__start
         self.__description = ''
+        self.__headers = headers.copy()
 
     @property
     def description(self):
@@ -40,13 +42,18 @@ class Google(Browser):
     def google_search(self, text):
         self.search = text
         connect_url = self.general_url + self.search + self.__start
-        self.get(connect_url)
+
+        self.get(connect_url, time=2, google=True)
+        self.__headers['Cookie'] = self.cookie
 
     # метод поиска текста на сайте, используя встроенные средства Google
     # пример: google_search_text_on_site(ИНН, vk.com) -> запрос в Google: ИНН site:vk.com
-    def google_search_text_on_site(self, text, site_domain):
-        connect_url = self.general_url + text + ' site%3A' + site_domain
-        self.get(connect_url)
+    def google_search_inn_on_site(self, site_domain):
+        connect_url = self.general_url + 'инн' + ' site%3A' + site_domain
+
+        self.get(connect_url, time=2, google=True)
+        self.__headers['Cookie'] = self.cookie
+
         self.parse_google_description()
         inns = re.findall(inn, self.description, flags=re.I)
         if not inns:

@@ -10,12 +10,21 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class Browser:
     def __init__(self):
-        self.__headers = headers
-        self.__proxies = proxies
+        self.__headers = headers.copy()
+        self.__proxies = proxies.copy()
         self.__html = BeautifulSoup()
         self.__domain_has = False
         self.__domain = None
         self.__url = None
+        self.__cookie = None
+
+    @property
+    def cookie(self):
+        return self.__cookie
+
+    @cookie.setter
+    def cookie(self, value):
+        self.__cookie = value
 
     @property
     def domain_has(self):
@@ -74,23 +83,27 @@ class Browser:
     def html_clear(self):
         self.html = ''
 
-    def get(self, url):
+    def get(self, url, time=0, google=False):
         self.url = url
         if self.domain in Blacklist:
             logger.WARN('Website in Blacklist', self.url)
             return None
         try:
+            sleep(time)
             logger.INFO('Connecting to', url)
             response = requests.get(url=url, headers=self.__headers, timeout=(5, 5))
-            sleep(2)
+            if google:
+                self.cookie = response.cookies
             response.raise_for_status()
             self.html = BeautifulSoup(response.text, 'lxml')
         except Exception as err:
-            logger.WARN('Failed connect to', url)
+            logger.WARN('Failed connect to', url, repr(err))
             try:
+                sleep(time)
                 logger.INFO('Reconnecting to', url)
                 response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=False)
-                sleep(2)
+                if google:
+                    self.cookie = response.cookies
                 response.raise_for_status()
                 self.html = BeautifulSoup(response.text, 'lxml')
             except Exception as err:
