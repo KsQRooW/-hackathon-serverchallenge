@@ -5,8 +5,8 @@ headers = {
 }
 
 proxies = {
-            'http': 'http://185.174.138.19:80',  # http Russia - 20ms
-            'https': 'https://91.224.62.194:8080'  # https Russia - 20ms
+            'http': 'http://149.125.54.187:8080',  # http Russia - 20ms
+            'https': 'https://149.125.54.187:8080'  # https Russia - 20ms
 }
 
 path_excel_input = 'source/poiskpostav_v1_test.xlsx'                 # Список товаров

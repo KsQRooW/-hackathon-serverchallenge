@@ -8,6 +8,7 @@ from .config import *
 from .class_Supplier import Supplier
 
 
+
 # Парсинг и выгрузка экселя
 excel_input_file = Excel(path_excel_input)
 excel_input_line_number = excel_input_file.num_goods

@@ -7,7 +7,8 @@ stop_extensions = r'(\.pdf\Z)|(\.xls\Z)|(\.xlsx\Z)|(\.swf\Z)|(\.ps\Z)|(\.dwf\Z)|
                   r'(\.odp\Z)|(\.ods\Z)|(\.odt\Z)|(\.rtf\Z)|(\.svg\Z)|(\.tex\Z)|(\.txt\Z)|' \
                   r'(\.text \Z)|(\.wml\Z)|(\.wap\Z)|(\.xml\Z)'
 
-gost_inn = r'((?:гост|инн|гост р исо)\D?\s?\D?\s?\d+)'
+gost = r'((?:гост|гост р исо|din)\D?\s?\D?\s?\d+)'
+inn = r'инн\D?\s?\D?\s?\d+'
 digits = r'\d+'
 
 
@@ -84,13 +85,13 @@ class Text:
                 self.word.add(line.lower().strip())
 
     @staticmethod
-    def gost_inn_find(text, parameters):
-        on_site = re.findall(gost_inn, text)
+    def gost_check(text, parameters):
+        on_site = re.findall(gost, text)
         try:
             digits_on_site = set(map(lambda x: re.search(digits, x).group(), on_site))
         except AttributeError:
             digits_on_site = set()
-        our = re.findall(gost_inn, parameters)
+        our = re.findall(gost, parameters)
         digits_our = set(map(lambda x: re.search(digits, x).group(), our))
         if digits_on_site.intersection(digits_our):
             return True
@@ -100,9 +101,9 @@ class Text:
     def name_find(text, org_types):
         names = set()
         for type_ in org_types:
-            reg1 = fr'{type_}\D?\s?\D?\s?\w*\D?\s?\D?\s?["«].+["»]'
+            reg = fr'{type_}\D?\s?\D?\s?\w*\D?\s?\D?\s?["«].+["»]'
             try:
-                reg_found = re.search(reg1, text).group()
+                reg_found = re.search(reg, text).group()
             except AttributeError:
                 reg_found = None
             if reg_found:

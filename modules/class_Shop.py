@@ -15,7 +15,7 @@ class Shop(Browser):
     def check_gost(self, parameters):
         all_text = self.get_text(self.html.find('body'))
 
-        check = Text().gost_inn_find(all_text.lower(), parameters.lower())
+        check = Text().gost_check(all_text.lower(), parameters.lower())
         if not check:
             logger.WARN('GOST not found', self.url)
         return check

@@ -1,5 +1,5 @@
 from .class_Browser import Browser
-from .class_Text import Text, gost_inn
+from .class_Text import Text, inn
 from .class_Logs import logger
 from time import sleep
 import re

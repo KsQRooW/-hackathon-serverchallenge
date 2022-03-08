@@ -1,6 +1,6 @@
 from .class_Browser import Browser
 from .class_Logs import logger
-from .class_Text import stop_extensions
+from .class_Text import stop_extensions, inn, digits
 import re
 
 
@@ -42,30 +42,25 @@ class Google(Browser):
         connect_url = self.general_url + self.search + self.__start
         self.get(connect_url)
 
-        # try:
-        #     logger.OK('Connecting to', connect_url)
-        #     self.driver.get(connect_url)
-        # except Exception as err:
-        #     logger.FAIL('Connecting to', connect_url, type(err))
-
     # метод поиска текста на сайте, используя встроенные средства Google
     # пример: google_search_text_on_site(ИНН, vk.com) -> запрос в Google: ИНН site:vk.com
     def google_search_text_on_site(self, text, site_domain):
-        connect_url = self.general_url + text + 'site%3A' + site_domain
+        connect_url = self.general_url + text + ' site%3A' + site_domain
         self.get(connect_url)
-
-        # try:
-        #     logger.OK('Connecting to', connect_url)
-        #     self.driver.get(connect_url)
-        # except Exception as err:
-        #     logger.FAIL('Connecting to', connect_url, type(err))
+        self.parse_google_description()
+        inns = re.findall(inn, self.description, flags=re.I)
+        if not inns:
+            return None
+        inns_digits = tuple(map(lambda x: re.search(digits, x).group(), inns))
+        inns_counts = set(map(lambda x: (x, inns.count(x)), inns_digits))
+        max_inn = max(inns_counts, key=lambda x: x[1])[0]
+        return max_inn  # Самый часто встрчаемый ИНН на странице
 
     # Парсинг ссылок с поискового запроса Google
     # Корректнее вызывать функцию после любой функции типа google_search...
     def parse_google_links(self) -> set:
         url_pattern = re.compile(r'/url\?q=http.+')
         classes_with_urls = self.html.find_all('a', {'href': url_pattern})
-        # classes_with_urls = self.driver.find_elements(By.CLASS_NAME, 'yuRUbf')
         markets_urls = set()
         for class_ in classes_with_urls:
             url = class_.get('href')
@@ -73,7 +68,6 @@ class Google(Browser):
             clear_url = re.split(r'&sa', clear_url)[0]
             if 'google' in clear_url:
                 continue
-            # market_url = class_.find_element(By.TAG_NAME, 'a').get_attribute('href')
             check_stop_extensions = re.search(stop_extensions, clear_url)
             if not check_stop_extensions:
                 markets_urls.add(clear_url)
@@ -85,7 +79,7 @@ class Google(Browser):
         divs = s.find_all('div', recursive=False)
         if divs:
             if check:  # Для первого прохода по div'ам
-                for div in divs[3:-1]:
+                for div in divs[3:]:
                     if div.find_all_next('a'):
                         self.__recursion_find(div, False)
             else:

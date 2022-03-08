@@ -1,11 +1,9 @@
 from urllib import parse
 from .config import headers, proxies, Blacklist
 from .class_Logs import logger
-# from selenium import webdriver
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.common.by import By
 import requests
 from bs4 import BeautifulSoup
+from time import sleep
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -15,30 +13,20 @@ class Browser:
         self.__headers = headers
         self.__proxies = proxies
         self.__html = BeautifulSoup()
+        self.__domain_has = False
         self.__domain = None
         self.__url = None
 
-        # self.__requests = requests
-        # self.__BeautifulSoup = BeautifulSoup
-
-        # self.__options = webdriver.ChromeOptions()
-        # self.__options.add_argument('headless')
-        # self.__options.add_argument("–disable-infobars")
-        # self.__options.add_argument("–enable-automation")
-        # self.__options.add_argument("--disable-notifications")
-        #
-        # self.__driver = None
-        # self.__waiter = None
-
-    """
     @property
-    def BeautifulSoup(self):
-        return self.__BeautifulSoup
+    def domain_has(self):
+        return self.__domain_has
 
-    @property
-    def requests(self):
-        return self.__requests
-    """
+    @domain_has.setter
+    def domain_has(self, value: bool):
+        if not isinstance(value, bool):
+            raise TypeError(f"Передан класс {type(value)}. Ожидался класс Bool.")
+        self.__domain_has = value
+
     @staticmethod
     def get_text(item, log=True):
         try:
@@ -56,12 +44,14 @@ class Browser:
     @url.setter
     def url(self, url):
         self.__url = url
+        self.domain_has = False
 
     @property
     def domain(self):
         if not self.url:
             raise Exception("URL is None type. Use .get or .url")
-        self.__domain = Browser.domain_parser(self.url)
+        if not self.domain_has:
+            self.__domain = self.domain_parser(self.url)
         return self.__domain
 
     @staticmethod
@@ -91,42 +81,19 @@ class Browser:
             return None
         try:
             logger.INFO('Connecting to', url)
-            # (proxies=proxies)
-            # timeout=(5, 5) - Время на коннект и чтение страницы соответственно
             response = requests.get(url=url, headers=self.__headers, timeout=(5, 5))
+            sleep(2)
+            response.raise_for_status()
             self.html = BeautifulSoup(response.text, 'lxml')
         except Exception as err:
             logger.WARN('Failed connect to', url)
             try:
                 logger.INFO('Reconnecting to', url)
-                # (proxies=proxies)
                 response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=False)
+                sleep(2)
+                response.raise_for_status()
                 self.html = BeautifulSoup(response.text, 'lxml')
             except Exception as err:
                 logger.FAIL('Not connected to', url, repr(err))
                 return None
         return self.html
-
-    """
-    def quit(self):
-        self.__driver.quit()
-    
-    @property
-    def driver(self):
-        return self.__driver
-
-    @driver.setter
-    def driver(self, path):
-        self.__driver = webdriver.Chrome(executable_path=path, options=self.__options)
-        # self.__waiter = WebDriverWait(self.__driver, 5)
-
-    @property
-    def options(self):
-        return self.__options
-
-    def add_argument(self, arg: str):
-        if isinstance(arg, str):
-            self.__options.add_argument(arg)
-        else:
-            raise TypeError(f"Передан класс {type(arg)}. Ожидался класс str.")
-    """
