@@ -1,5 +1,5 @@
 from modules import excel_input_line_number, excel_input_file, market_words, google_browser, market_shop_browser, \
-    params1, params2, num_google_pages, supplier_browser
+    params1, params2, num_google_pages, supplier_browser, excel_file
 from pprint import pprint
 from datetime import datetime
 

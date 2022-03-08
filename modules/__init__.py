@@ -8,12 +8,9 @@ from .config import *
 from .class_Supplier import Supplier
 
 
-
 # Парсинг и выгрузка экселя
 excel_input_file = Excel(path_excel_input)
 excel_input_line_number = excel_input_file.num_goods
-# excel_input_file.importgoods()
-# excel_input_data = excel_input_file.structurizedata(params1, params2)
 
 text = Text()
 # Загрузка словаря market_words
@@ -35,3 +32,6 @@ market_shop_browser = Shop()
 
 # Инициализация браузера для поиска информации по поставщику
 supplier_browser = Supplier()
+
+# Инициализация экселя для вывода
+excel_file = Excel(path_excel_output, read_only=False)

@@ -83,29 +83,26 @@ class Browser:
     def html_clear(self):
         self.html = ''
 
+    def __connect(self, url, time, google, verify):
+        sleep(time)
+        logger.INFO('Connecting to', url)
+        response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=verify)
+        if google:
+            self.cookie = response.cookies
+        response.raise_for_status()
+        self.html = BeautifulSoup(response.text, 'lxml')
+
     def get(self, url, time=0, google=False):
         self.url = url
         if self.domain in Blacklist:
             logger.WARN('Website in Blacklist', self.url)
             return None
         try:
-            sleep(time)
-            logger.INFO('Connecting to', url)
-            response = requests.get(url=url, headers=self.__headers, timeout=(5, 5))
-            if google:
-                self.cookie = response.cookies
-            response.raise_for_status()
-            self.html = BeautifulSoup(response.text, 'lxml')
+            self.__connect(url, time, google, True)
         except Exception as err:
             logger.WARN('Failed connect to', url, repr(err))
             try:
-                sleep(time)
-                logger.INFO('Reconnecting to', url)
-                response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=False)
-                if google:
-                    self.cookie = response.cookies
-                response.raise_for_status()
-                self.html = BeautifulSoup(response.text, 'lxml')
+                self.__connect(url, time, google, False)
             except Exception as err:
                 logger.FAIL('Not connected to', url, repr(err))
                 return None

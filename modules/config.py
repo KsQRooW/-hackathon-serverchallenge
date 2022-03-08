@@ -16,6 +16,8 @@ proxies = {
 
 path_excel_input = 'source/poiskpostav_v1_test.xlsx'                 # Список товаров
 
+path_excel_output = 'source/poiskpostav_OUTPUT.xlsx'
+
 path_market_words = 'source/market_words.txt'
 
 path_org_types = 'source/org_types.txt'
