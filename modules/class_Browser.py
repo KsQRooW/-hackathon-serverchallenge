@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from time import sleep
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
@@ -88,7 +89,7 @@ class Browser:
         sleep(time)
         logger.INFO('Connecting to', url)
         response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=verify)
-        if google:
+        if google and response.status_code == 200:
             self.cookie = response.cookies
         response.raise_for_status()
         self.html = BeautifulSoup(response.text, 'lxml')
