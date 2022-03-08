@@ -23,29 +23,22 @@ def main():
                 # Проверка магазин ли это?
                 if market_shop_browser.get(link):
                     if market_shop_browser.check_market_or_no(market_words):
-                        """
-                        # Проверка совпадения параметров из экселя с инф на сайте +++
-                        if market_shop_browser.parameter_matching_excel(current_item['параметры']):
-                            # парсинг ИНН
-                                # парсинг инфы по магазину по ИНН
-                                    # сохраняем магазин в словарь
-                        """
+                        # Проверка совпадения параметров из экселя с инф на сайте
                         # Проверка ГОСТа на сайте
                         if market_shop_browser.check_gost(current_item['параметры']['стандарт']):
                             # Парсинг ИНН
-                            # descriptions = google_browser.parse_google_description()
-                            # print(descriptions)
-                            # TODO если найден ИНН на сайте, сохранить в supplier_browser.inn, иначе
-                            # Поиск ИНН по адресу сайта
                             inn = google_browser.google_search_inn_on_site(market_shop_browser.domain)
-                            if not inn:
-                                if not supplier_browser.find_inn_by_url(market_shop_browser.domain):
+                            if inn:
+                                supplier_browser.inn = inn
+                            else:
+                                if not supplier_browser.find_inn_by_url(market_shop_browser.domain):    # Поиск ИНН по адресу сайта
                                     continue
-
                             # Парсинг информации по поставщику
                             if supplier_browser.parse_supplier_data():
                                 # Сохранение информации по поставщику
                                 # TODO сохранение из supplier_browser.supplier_data
+                                pprint(supplier_browser.supplier_data)
+                                # TODO add market_shop_browser.url
                                 if items_and_shops.get(current_item['поиск'], None):
                                     items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
                                 else:

@@ -38,7 +38,8 @@ class Supplier(Browser):
             else:
                 logger.WARN('Few INN found: ' + ' '.join(self.__list_inn))
                 self.__select_one_inn()
-        return True
+            return True
+        return False
 
     # Проверка, содержится ли домен site в списке urls
     def __is_right_url(self, urls):
@@ -121,39 +122,67 @@ class Supplier(Browser):
             # Дата регистрации
             inf = self.get_text(self.html.find('div', class_='cCard__CompanyDescription'), log=False)
             try:
-                strdate = re.search(r'Действует с \d\d.\d\d.\d\d\d\d', inf).group()[12:]                    # TODO добавить КПП, ОГРН, ОКПО
-            except Exception as er:
-                logger.FAIL('Date not found', err=repr(er))
-                strdate = ''
-            self.__supplier_data['Дата регистрации'] = strdate
+                self.__supplier_data['Дата регистрации'] = re.search(r'Действует с \d\d.\d\d.\d\d\d\d', inf).group()[12:]
+            except Exception:
+                self.__supplier_data['Дата регистрации'] = ''
+            try:
+                self.__supplier_data['КПП'] = re.search(r'КПП \d+', inf, flags=re.I).group()[4:]
+            except Exception:
+                self.__supplier_data['КПП'] = ''
+            try:
+                self.__supplier_data['ОГРН'] = re.search(r'ОГРН \d+', inf, flags=re.I).group()[5:]
+            except Exception:
+                self.__supplier_data['ОГРН'] = ''
+            try:
+                self.__supplier_data['ОКПО'] = re.search(r'ОКПО \d+', inf, flags=re.I).group()[5:]
+            except Exception:
+                self.__supplier_data['ОКПО'] = ''
             #
-            self.__supplier_data['Название'] = self.get_text(
-                self.html.find('div', class_='cCard__MainReq-Name'), log=False
-            )
-            self.__supplier_data['Название полное'] = self.get_text(
-                self.html.find('div', class_='cCard__MainReq-FullName'), log=False
-            )
-            self.__supplier_data['Руководитель'] = self.get_text(
-                self.html.find('div', class_='cCard__Director-Name').find('span'), log=False
-            ).strip()
-            self.__supplier_data['Адрес'] = self.get_text(
-                self.html.find('div', class_='cCard__Contacts-Address'), log=False
-            ).strip()
-            self.__supplier_data['Выручка'] = self.get_text(
-                self.html.find(
-                    'div', class_='cCard__Contacts'
-                ).find(
-                    'div', class_='cCard__Contacts-Revenue-Desktop cCard__Main-Grid-Element'
-                ).find('span', class_='cCard__BlockMaskSum'),
-                log=False
-            ).strip()
-            self.__supplier_data['Прибыль'] = self.get_text(
-                self.html.find(
-                    'div', class_='cCard__Owners-Profit-Desktop cCard__Main-Grid-Element'
-                ).find('span', class_='cCard__BlockMaskSum'),
-                log=False
-            ).strip()
-            # Суды
+            try:
+                self.__supplier_data['Название'] = self.get_text(
+                    self.html.find('div', class_='cCard__MainReq-Name'), log=False
+                )
+            except Exception:
+                self.__supplier_data['Название'] = ''
+            try:
+                self.__supplier_data['Название полное'] = self.get_text(
+                    self.html.find('div', class_='cCard__MainReq-FullName'), log=False
+                )
+            except Exception:
+                self.__supplier_data['Название полное'] = ''
+            try:
+                self.__supplier_data['Руководитель'] = self.get_text(
+                    self.html.find('div', class_='cCard__Director-Name').find('span'), log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Руководитель'] = ''
+            try:
+                self.__supplier_data['Адрес'] = self.get_text(
+                    self.html.find('div', class_='cCard__Contacts-Address'), log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Адрес'] = ''
+            try:
+                self.__supplier_data['Выручка'] = self.get_text(
+                    self.html.find(
+                        'div', class_='cCard__Contacts'
+                    ).find(
+                        'div', class_='cCard__Contacts-Revenue-Desktop cCard__Main-Grid-Element'
+                    ).find('span', class_='cCard__BlockMaskSum'),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Выручка'] = ''
+            try:
+                self.__supplier_data['Прибыль'] = self.get_text(
+                    self.html.find(
+                        'div', class_='cCard__Owners-Profit-Desktop cCard__Main-Grid-Element'
+                    ).find('span', class_='cCard__BlockMaskSum'),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Прибыль'] = ''
+            # Суды истец
             try:
                 self.__supplier_data['Истец'] = {}
                 self.__supplier_data['Истец']['Выиграл'] = self.get_text(
@@ -176,7 +205,7 @@ class Supplier(Browser):
                 ).strip()
             except Exception:
                 self.__supplier_data['Истец'] = ''
-            #
+            # Суды ответчик
             try:
                 self.__supplier_data['Ответчик'] = {}
                 self.__supplier_data['Ответчик']['Выиграл'] = self.get_text(
@@ -200,19 +229,69 @@ class Supplier(Browser):
             except Exception:
                 self.__supplier_data['Ответчик'] = ''
             #
-            self.__supplier_data['Уставный капитал'] = self.get_text(
-                self.html.find(
-                    'div', class_='cCard__Owners-OwnerList-Authorized-Capital-Sum cCard__Owners-OwnerList-Bold'
-                ),
-                log=False
-            )
-            self.__supplier_data['Стоимость'] = self.get_text(
-                self.html.find(
-                    'div', class_='cCard__Reliability-Cost-Desktop cCard__Main-Grid-Element'
-                ).find('span', class_='cCard__BlockMaskSum'),
-                log=False
-            ).strip()
-            # TODO Торги и госконтракты, Надежность, КПП, ОГРН
+            try:
+                self.__supplier_data['Уставный капитал'] = self.get_text(
+                    self.html.find(
+                        'div', class_='cCard__Owners-OwnerList-Authorized-Capital-Sum cCard__Owners-OwnerList-Bold'
+                    ),
+                    log=False
+                )
+            except Exception:
+                self.__supplier_data['Уставный капитал'] = ''
+            try:
+                self.__supplier_data['Стоимость'] = self.get_text(
+                    self.html.find(
+                        'div', class_='cCard__Reliability-Cost-Desktop cCard__Main-Grid-Element'
+                    ).find('span', class_='cCard__BlockMaskSum'),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Стоимость'] = ''
+            # Тендеры
+            try:
+                self.__supplier_data['Тендер'] = {}
+                self.__supplier_data['Тендер']['участник'] = self.get_text(
+                    self.html.find(
+                        'div', class_='cCard__Reliability-Tender-data'
+                    ).find('div', class_='cCard__Reliability-Tender-Block-C2'),
+                    log=False
+                ).strip()
+                self.__supplier_data['Тендер']['выиграл'] = self.get_text(
+                    self.html.find(
+                        'div', class_='cCard__Reliability-Tender-data'
+                    ).find('div', class_='ws-flexbox ws-justify-content-between').next_sibling.find(
+                        'div', class_='cCard__Reliability-Tender-Block-C2'
+                    ),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Тендер'] = ''
+            # Госконтракты
+            try:
+                self.__supplier_data['Госконтракты'] = self.get_text(
+                    self.html.find(
+                        'div', class_='cCard__Reliability-Gov-Contract-data'
+                    ).find('div', class_='cCard__Reliability-Tender-Block-C2'),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Госконтракты'] = ''
+            try:
+                self.__supplier_data['Надежность'] = {}
+                self.__supplier_data['Надежность']['Плюсы'] = self.get_text(
+                    self.html.find(
+                        'div', class_='analytics-ReliabilitySbisRu__subHeaderGreen analytics-ReliabilitySbisRu__right'
+                    ),
+                    log=False
+                ).strip()
+                self.__supplier_data['Надежность']['Минусы'] = self.get_text(
+                    self.html.find(
+                        'div', class_='analytics-ReliabilitySbisRu__subHeaderRed analytics-ReliabilitySbisRu__right'
+                    ),
+                    log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Надежность'] = ''
 
             # TODO отзывы
         return True
