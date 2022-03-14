@@ -3,7 +3,7 @@ from datetime import datetime
 
 class Logs:
     def __init__(self):
-        self.path = 'source/logs.txt'
+        # self.path = 'source/logs.txt'
         self.__time = None
         self.status = None
         self.url = ''

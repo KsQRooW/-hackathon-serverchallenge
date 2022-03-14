@@ -1,5 +1,7 @@
-from modules import excel_input_line_number, excel_input_file, market_words, google_browser, market_shop_browser, \
-    params1, params2, num_google_pages, supplier_browser
+from modules import excel_input_line_number, excel_input_file, excel_params1, excel_params2     # Excel
+from modules import market_shop_browser, market_words                                           # Shop
+from modules import google_browser, num_google_pages                                            # Google
+from modules import supplier_browser                                                            # Supplier
 from pprint import pprint
 from datetime import datetime
 
@@ -10,10 +12,10 @@ def main():
     output = open('source/output.txt', 'w', encoding='utf-8')
     for i in range(excel_input_line_number):
         # Чтение одной строки из эксель файла
-        current_item = excel_input_file.readline().structurizedata(params1, params2)
-        # Три страницы поисковой выдачи
+        current_item = excel_input_file.readline().structurizedata(excel_params1, excel_params2)
         # pprint(current_item)
         markets_ranked = []
+        # Три страницы поисковой выдачи
         for number in range(num_google_pages):
             google_browser.start_page = number
             google_browser.google_search(current_item['поиск'])
@@ -31,29 +33,26 @@ def main():
                             if inn:
                                 supplier_browser.inn = inn
                             else:
-                                if not supplier_browser.find_inn_by_url(market_shop_browser.domain):    # Поиск ИНН по адресу сайта
+                                # Поиск ИНН по адресу сайта
+                                if not supplier_browser.find_inn_by_url(market_shop_browser.domain):
                                     continue
                             # Парсинг информации по поставщику
                             if supplier_browser.parse_supplier_data():
-                                # Сохранение информации по поставщику
-                                # TODO сохранение из supplier_browser.supplier_data
                                 # pprint(supplier_browser.supplier_data)
                                 # Присвоения ранга магазину
                                 supplier_browser.ranking()
                                 markets_ranked.append(supplier_browser.supplier_data)
-                                # TODO add market_shop_browser.url
                                 if items_and_shops.get(current_item['поиск'], None):
                                     items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
                                 else:
                                     items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
         markets_ranked.sort(key=lambda x: x['RANK'], reverse=True)
+        # TODO вывод в эксель
         output.write(f'{current_item["поиск"]}\n')
         output.write(f'{markets_ranked}')
         output.write('-' * 15)
         # print(current_item['поиск'])
         # pprint(markets_ranked)
-        # 7) ранжируем магазины для позиции из экселя
-        # 8) выводим на отдельный лист экселя информацию по магазинам для товара
 
     # pprint(items_and_shops)
     # print(datetime.now() - time)

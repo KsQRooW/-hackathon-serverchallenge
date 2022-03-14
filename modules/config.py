@@ -11,10 +11,10 @@ proxy = '217.29.63.159:10667'
 
 
 proxies = {
-           'https': f'http://{login}:{password}@{proxy}'  # https Russia - 20ms
+           'https': f'http://{login}:{password}@{proxy}'    # https Russia - 20ms
 }
 
-path_excel_input = 'source/poiskpostav_v1_test.xlsx'                 # Список товаров
+path_excel_input = 'source/poiskpostav_v1_test.xlsx'        # Список товаров
 
 path_excel_output = 'source/poiskpostav_OUTPUT.xlsx'
 
@@ -22,17 +22,17 @@ path_market_words = 'source/market_words.txt'
 
 path_org_types = 'source/org_types.txt'
 
-params1 = {'стандарт': 'ГОСТ',                      # Параметры товаров 1 типа
-           'покрытие': 'покрытие',
-           'головка': 'головка',
-           'рабочий вакуум': 'рабочий вакуум'
-           }
+excel_params1 = {'стандарт': 'ГОСТ',                        # Параметры товаров 1 типа
+                 'покрытие': 'покрытие',
+                 'головка': 'головка',
+                 'рабочий вакуум': 'рабочий вакуум'
+                 }
 
-num_google_pages = 3                                # Количество страниц в поиске гугл
+num_google_pages = 3                                        # Количество страниц в поиске гугл
 
-params2 = {'СТАНДАРТ', 'ГОЛОВКА', 'ОБОЗНАЧЕНИЕ',    # Параметры товаров 2 типа
-           'КЛАСС ПРОЧНОСТИ', 'МАТЕРИАЛ', 'ТИП'
-           }
+excel_params2 = {'СТАНДАРТ', 'ГОЛОВКА', 'ОБОЗНАЧЕНИЕ',      # Параметры товаров 2 типа
+                 'КЛАСС ПРОЧНОСТИ', 'МАТЕРИАЛ', 'ТИП'
+                 }
 
 Blacklist = {
     'docs.cntd.ru',
