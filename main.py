@@ -19,7 +19,7 @@ def main():
         for number in range(num_google_pages):
             google_browser.start_page = number
             google_browser.google_search(current_item['поиск'])
-            # Получить список ссылок на данной странице гугл
+            # Получить список ссылок на текущей странице гугл
             links_of_shops = google_browser.parse_google_links()
             for link in links_of_shops:
                 # Проверка магазин ли это?
