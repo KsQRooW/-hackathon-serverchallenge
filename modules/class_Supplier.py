@@ -53,7 +53,7 @@ class Supplier(Browser):
         general_url = 'https://spark-interfax.ru/search?Query='
         self.__list_inn = []
         url = general_url + self.website
-        self.get(url)
+        self.get(url, time=1)
         list_items = self.html.find_all('li', class_='search-result-list__item')
         if len(list_items) == 0:
             logger.FAIL('INN not found in database spark-interfax')
@@ -78,7 +78,7 @@ class Supplier(Browser):
         logger.INFO('Search for the newest INN')
         for temp_inn in self.__list_inn:
             url = general_url + temp_inn
-            self.get(url)
+            self.get(url, time=2)
             # Проверка действующая ли компания или нет
             liquidated = self.get_text(self.html.find('div', class_='c-sbisru-CardStatus__closed'), log=False)
             if not liquidated:
@@ -91,7 +91,6 @@ class Supplier(Browser):
                 dates[datetime.strptime(strdate, '%d.%m.%Y')] = temp_inn
             else:
                 logger.WARN('INN ' + temp_inn + ' liquidated')
-            sleep(1)                        # Pause to avoid ban
         if dates:
             self.__inn = dates[max(dates.keys())]
             logger.INFO('INN found: ' + self.inn)
@@ -114,7 +113,7 @@ class Supplier(Browser):
             win = self.__supplier_data['Истец']['Выиграл'][:-1]
             lose = self.__supplier_data['Истец']['Проиграл'][:-1]
             if win != '':
-                if lose != '':
+                if lose != '' and lose != '0':
                     rating += int(win) / int(lose) * coefs[1]
                 else:
                     rating += int(win) * coefs[1]
@@ -128,7 +127,7 @@ class Supplier(Browser):
             win = self.__supplier_data['Ответчик']['Выиграл'][:-1]
             lose = self.__supplier_data['Ответчик']['Проиграл'][:-1]
             if win != '':
-                if lose != '':
+                if lose != '' and lose != '0':
                     rating += int(win) / int(lose) * coefs[3]
                 else:
                     rating += int(win) * coefs[3]
@@ -146,7 +145,7 @@ class Supplier(Browser):
             win = self.__supplier_data['Тендер']['выиграл']
             just = self.__supplier_data['Тендер']['участник']
             if win != '':
-                if just != '':
+                if just != '' and just != '0':
                     rating += int(win) / int(just) * coefs[6]
         if self.__supplier_data['Выручка'] != '':
             key = re.search(r'млн ₽|тыс ₽|млрд ₽', self.__supplier_data['Выручка']).group()
@@ -156,17 +155,18 @@ class Supplier(Browser):
             key = re.search(r'млн ₽|тыс ₽|млрд ₽', self.__supplier_data['Стоимость']).group()
             value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Стоимость'])
             rating += sokr[key] * float(value) * coefs[8]
-        self.__supplier_data['RANK'] = rating
+        self.__supplier_data['RANK'] = float("{0:.2f}".format(rating))
 
     @property
     def supplier_data(self):
         return self.__supplier_data
 
     def parse_supplier_data(self):
+        logger.INFO('Start parsing supplier info', self.website)
         self.__supplier_data = {}
         general_url = 'https://sbis.ru/contragents/'
         url = general_url + self.inn
-        self.get(url, time=1)
+        self.get(url, time=2)
         # Проверка действующая ли компания или нет
         liquidated = self.get_text(self.html.find('div', class_='c-sbisru-CardStatus__closed'), log=False)
         if liquidated:

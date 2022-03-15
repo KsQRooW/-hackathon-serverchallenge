@@ -55,12 +55,14 @@ def main():
         markets_ranked.sort(key=lambda x: x['RANK'], reverse=True)
         # TODO вывод в эксель
         output.write(f'{current_item["поиск"]}\n')
-        output.write(f'{markets_ranked}')
-        output.write('-' * 15)
+        print(*markets_ranked, sep='\n', file=output)
+        # output.write(f'{markets_ranked}')
+        output.write('-' * 15 + '\n')
         # print(current_item['поиск'])
         # pprint(markets_ranked)
 
     excel_input_file.close_file()
+    output.close()
 
 
 if __name__ == '__main__':

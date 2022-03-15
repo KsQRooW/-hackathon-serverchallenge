@@ -85,9 +85,9 @@ class Browser:
     def html_clear(self):
         self.html = ''
 
-    def __connect(self, url, time, google, verify):
+    def __connect(self, url, time, google, verify=True, info='Connecting to'):
         sleep(time)
-        logger.INFO('Connecting to', url)
+        logger.INFO(info, url)
         response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=verify)
         if google and response.status_code == 200:
             self.cookie = response.cookies
@@ -100,11 +100,11 @@ class Browser:
             logger.WARN('Website in Blacklist', self.url)
             return None
         try:
-            self.__connect(url, time, google, True)
+            self.__connect(url, time, google)
         except Exception as err:
             logger.WARN('Failed connect to', url, repr(err))
             try:
-                self.__connect(url, time, google, False)
+                self.__connect(url, time, google, verify=False, info='Reconnecting to')
             except Exception as err:
                 logger.FAIL('Not connected to', url, repr(err))
                 return None
