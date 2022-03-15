@@ -66,7 +66,8 @@ class Google(Browser):
     # Парсинг ссылок с поискового запроса Google
     # Корректнее вызывать функцию после любой функции типа google_search...
     def parse_google_links(self) -> set:
-        url_pattern = re.compile(r'/url\?q=http.+')
+        # url_pattern = re.compile(r'/url\?q=http.+')
+        url_pattern = re.compile(r'http.+')
         classes_with_urls = self.html.find_all('a', {'href': url_pattern})
         markets_urls = set()
         for class_ in classes_with_urls:
