@@ -173,16 +173,35 @@ class Supplier(Browser):
             logger.FAIL('Supplier liquidated!')
             return False
         else:
-            self.__supplier_data['Статус'] = 'Действующее'
-            # Парсинг
-            self.__supplier_data['ИНН'] = self.inn
+            # self.__supplier_data['Статус'] = 'Действующее'      # Включаем только действующие
             self.__supplier_data['Сайт'] = self.website
+            # Парсинг
+            try:
+                self.__supplier_data['Название'] = self.get_text(
+                    self.html.find('div', class_='cCard__MainReq-Name'), log=False
+                )
+            except Exception:
+                self.__supplier_data['Название'] = ''
+            try:
+                self.__supplier_data['Название полное'] = self.get_text(
+                    self.html.find('div', class_='cCard__MainReq-FullName'), log=False
+                )
+            except Exception:
+                self.__supplier_data['Название полное'] = ''
+            try:
+                self.__supplier_data['Адрес'] = self.get_text(
+                    self.html.find('div', class_='cCard__Contacts-Address'), log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Адрес'] = ''
+            # TODO телефон, почта если есть
             # Дата регистрации
             inf = self.get_text(self.html.find('div', class_='cCard__CompanyDescription'), log=False)
             try:
                 self.__supplier_data['Дата регистрации'] = re.search(r'Действует с \d\d.\d\d.\d\d\d\d', inf).group()[12:]
             except Exception:
                 self.__supplier_data['Дата регистрации'] = ''
+            self.__supplier_data['ИНН'] = self.inn
             try:
                 self.__supplier_data['КПП'] = re.search(r'КПП \d+', inf, flags=re.I).group()[4:]
             except Exception:
@@ -197,29 +216,11 @@ class Supplier(Browser):
                 self.__supplier_data['ОКПО'] = ''
             #
             try:
-                self.__supplier_data['Название'] = self.get_text(
-                    self.html.find('div', class_='cCard__MainReq-Name'), log=False
-                )
-            except Exception:
-                self.__supplier_data['Название'] = ''
-            try:
-                self.__supplier_data['Название полное'] = self.get_text(
-                    self.html.find('div', class_='cCard__MainReq-FullName'), log=False
-                )
-            except Exception:
-                self.__supplier_data['Название полное'] = ''
-            try:
                 self.__supplier_data['Руководитель'] = self.get_text(
                     self.html.find('div', class_='cCard__Director-Name').find('span'), log=False
                 ).strip()
             except Exception:
                 self.__supplier_data['Руководитель'] = ''
-            try:
-                self.__supplier_data['Адрес'] = self.get_text(
-                    self.html.find('div', class_='cCard__Contacts-Address'), log=False
-                ).strip()
-            except Exception:
-                self.__supplier_data['Адрес'] = ''
             try:
                 self.__supplier_data['Выручка'] = self.get_text(
                     self.html.find(

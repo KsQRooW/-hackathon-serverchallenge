@@ -34,4 +34,4 @@ market_shop_browser = Shop()
 supplier_browser = Supplier()
 
 # Инициализация экселя для вывода
-excel_file = Excel(path_excel_output, read_only=False)
+# excel_file = Excel(path_excel_output, read_only=False)
