@@ -155,7 +155,7 @@ class Supplier(Browser):
             key = re.search(r'млн ₽|тыс ₽|млрд ₽', self.__supplier_data['Стоимость']).group()
             value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Стоимость'])
             rating += sokr[key] * float(value) * coefs[8]
-        self.__supplier_data['RANK'] = float("{0:.2f}".format(rating))
+        self.__supplier_data['Рейтинг'] = "{0:.2f}".format(rating)
 
     @property
     def supplier_data(self):

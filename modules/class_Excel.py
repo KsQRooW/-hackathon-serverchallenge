@@ -1,4 +1,6 @@
-import openpyxl
+from openpyxl import open, Workbook
+from openpyxl import styles
+from openpyxl.cell import MergedCell
 import re
 
 
@@ -7,9 +9,114 @@ class Excel:
         self.initialData = ()
         self.structuredData = ()
         self.path = path
-        if path:
-            self.file = openpyxl.open(path, read_only=read_only)
+        if read_only and path:
+            self.file = open(path, read_only=read_only)
+        else:
+            self.file = Workbook()
+        self.file.active.title = 'Sheet_1'
         self.line_number = 2
+
+    def auto_size_cols(self):
+        for col in self.file.active.columns:
+            max_length = max(map(lambda x: len(x.value or ''), col))
+            column_letter = col[0].column_letter  # Get the column name
+            new_width = (max_length + 1) * 1.2
+            self.file.active.column_dimensions[column_letter].width = new_width
+
+    def output_values(self, output_dict: dict):
+        values = self.rec_find_vals_keys(output_dict)['vals']
+
+        next_row = self.file.active.max_row + 1
+        my_range = self.file.active.iter_cols(min_row=next_row, max_row=next_row, max_col=len(values), min_col=1)
+        for cell, val in zip(my_range, values):
+            cell[0].value = val
+            cell[0].border = styles.Border(right=styles.Side(style='thin'),
+                                           bottom=styles.Side(style='thin'))
+
+    def output_col_names(self, output_dict: dict):
+        keys = list(output_dict.keys())
+        vals, keys_with_dict = self.rec_find_vals_keys(output_dict).values()
+
+        next_row = self.file.active.max_row + 1
+        my_range = list(self.file.active.iter_cols(min_row=next_row, max_row=next_row, max_col=len(vals), min_col=1))
+        cell = key = 0
+        while cell != len(my_range) and key != len(keys):
+            my_range[cell][0].value = keys[key]
+            my_range[cell][0].font = styles.Font(bold=True)
+            my_range[cell][0].alignment = styles.Alignment(horizontal='center', vertical='center')
+            my_range[cell][0].border = styles.Border(left=styles.Side(style='thick'),
+                                                     right=styles.Side(style='thick'),
+                                                     top=styles.Side(style='thick'),
+                                                     bottom=styles.Side(style='thick'))
+            if keys[key] in keys_with_dict:
+                self.file.active.insert_cols(idx=my_range[cell][0].column + 1,
+                                             amount=len(keys_with_dict[keys[key]]) - 1)
+
+                self.file.active.merge_cells(start_row=my_range[cell][0].row,
+                                             start_column=my_range[cell][0].column,
+                                             end_row=my_range[cell][0].row,
+                                             end_column=my_range[cell][0].column + len(keys_with_dict[keys[key]]) - 1)
+
+                sub_range = self.file.active.iter_cols(min_row=my_range[cell][0].row + 1,
+                                                       max_row=my_range[cell][0].row + 1,
+                                                       min_col=my_range[cell][0].column,
+                                                       max_col=my_range[cell][0].column + len(
+                                                           keys_with_dict[keys[key]]) - 1)
+                for sub_cell, val in zip(sub_range, keys_with_dict[keys[key]]):
+                    sub_cell[0].value = val
+                    sub_cell[0].font = styles.Font(italic=True)
+                    sub_cell[0].alignment = styles.Alignment(horizontal='center', vertical='center')
+                    sub_cell[0].border = styles.Border(left=styles.Side(style='thick'),
+                                                       right=styles.Side(style='thick'),
+                                                       top=styles.Side(style='thick'),
+                                                       bottom=styles.Side(style='thick'))
+
+                cell += len(keys_with_dict[keys[key]]) - 2 or 1
+                key += 1
+            else:
+                self.file.active.merge_cells(start_row=my_range[cell][0].row,
+                                             start_column=my_range[cell][0].column,
+                                             end_column=my_range[cell][0].column,
+                                             end_row=my_range[cell][0].row + 1)
+                cell += 1
+                key += 1
+
+    def output_in_cell(self, value, cell=None):
+        if not cell:
+            self.__output_name(value, 'A1')
+        else:
+            self.file.active[cell] = value
+
+    def __output_name(self, value, cell):
+        self.file.active[cell] = value
+        self.file.active[cell].font = styles.Font(bold=True, size=12)
+
+    def new_sheet(self):
+        new_index = len(self.file.get_sheet_names()) + 1
+        self.file.create_sheet(f"Sheet_{new_index}")
+        self.file = self.file[f"Sheet_{new_index}"]
+
+    def save(self, path=None):
+        if path:
+            self.file.save(path)
+        self.file.save(self.path)
+
+    # recursion find values and keys with dict-values in dict
+    @staticmethod
+    def rec_find_vals_keys(a, vals=None, keys_with_dict=None):
+        if keys_with_dict is None:
+            keys_with_dict = {}
+        if vals is None:
+            vals = []
+
+        for key in a:
+            if isinstance(a[key], dict):
+                keys_with_dict.get(key, keys_with_dict.setdefault(key, list(a[key].keys())))
+                # keys_with_dict.append({key: list(a[key].keys())})
+                vals = Excel().rec_find_vals_keys(a[key], vals, keys_with_dict)['vals']
+            else:
+                vals.append(a[key])
+        return {'vals': vals, 'keys_with_dict': keys_with_dict}
 
     @property
     def num_goods(self):
@@ -46,7 +153,7 @@ class Excel:
                         search += (structName[temp],)
             return search
 
-        rawName = self.initialData[self.line_number-3]
+        rawName = self.initialData[self.line_number - 3]
 
         structName = {'исходная строка': rawName}
         if rawName.find(';') == -1:  # Описание товара 1 типа
@@ -89,7 +196,7 @@ class Excel:
         }
         self.structuredData += (outDict,)
 
-        return self.structuredData[self.line_number-3]
+        return self.structuredData[self.line_number - 3]
 
     def output_info(self, number):
         # wb = openpyxl.open('testfile.xlsx')  # Открываем тестовый Excel файл
