@@ -255,20 +255,26 @@ class Supplier(Browser):
             except Exception:
                 self.__supplier_data['Прибыль'] = ''
             # Суды истец
+            self.__supplier_data['Истец'] = {}
             try:
-                self.__supplier_data['Истец'] = {}
                 self.__supplier_data['Истец']['Выиграл'] = self.get_text(
                     self.html.find('div', class_='cCard__Owners-CourtStat-Complain').find(
                         'div', class_='cCard__Owners-CourtStat-Stat-Win'
                     ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
                     log=False
                 ).strip()
+            except Exception:
+                self.__supplier_data['Истец']['Выиграл'] = ''
+            try:
                 self.__supplier_data['Истец']['Проиграл'] = self.get_text(
                     self.html.find('div', class_='cCard__Owners-CourtStat-Complain').find(
                         'div', class_='cCard__Owners-CourtStat-Stat-Loose'
                     ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
                     log=False
                 ).strip()
+            except Exception:
+                self.__supplier_data['Истец']['Проиграл'] = ''
+            try:
                 self.__supplier_data['Истец']['Прочие'] = self.get_text(
                     self.html.find('div', class_='cCard__Owners-CourtStat-Complain').find(
                         'div', class_='cCard__Owners-CourtStat-Stat-Other'
@@ -276,22 +282,28 @@ class Supplier(Browser):
                     log=False
                 ).strip()
             except Exception:
-                self.__supplier_data['Истец'] = ''
+                self.__supplier_data['Истец']['Прочие'] = ''
             # Суды ответчик
+            self.__supplier_data['Ответчик'] = {}
             try:
-                self.__supplier_data['Ответчик'] = {}
                 self.__supplier_data['Ответчик']['Выиграл'] = self.get_text(
                     self.html.find('div', class_='cCard__Owners-CourtStat-Defend').find(
                         'div', class_='cCard__Owners-CourtStat-Stat-Win'
                     ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
                     log=False
                 ).strip()
+            except Exception:
+                self.__supplier_data['Ответчик']['Выиграл'] = ''
+            try:
                 self.__supplier_data['Ответчик']['Проиграл'] = self.get_text(
                     self.html.find('div', class_='cCard__Owners-CourtStat-Defend').find(
                         'div', class_='cCard__Owners-CourtStat-Stat-Loose'
                     ).find('div', class_='cCard__Owners-CourtStat-Stat-Value'),
                     log=False
                 ).strip()
+            except Exception:
+                self.__supplier_data['Ответчик']['Проиграл'] = ''
+            try:
                 self.__supplier_data['Ответчик']['Прочие'] = self.get_text(
                     self.html.find('div', class_='cCard__Owners-CourtStat-Defend').find(
                         'div', class_='cCard__Owners-CourtStat-Stat-Other'
@@ -299,7 +311,7 @@ class Supplier(Browser):
                     log=False
                 ).strip()
             except Exception:
-                self.__supplier_data['Ответчик'] = ''
+                self.__supplier_data['Ответчик']['Прочие'] = ''
             #
             try:
                 self.__supplier_data['Уставный капитал'] = self.get_text(
@@ -320,15 +332,18 @@ class Supplier(Browser):
             except Exception:
                 self.__supplier_data['Стоимость'] = ''
             # Тендеры
+            self.__supplier_data['Тендер'] = {}
             try:
-                self.__supplier_data['Тендер'] = {}
-                self.__supplier_data['Тендер']['участник'] = self.get_text(
+                self.__supplier_data['Тендер']['Участник'] = self.get_text(
                     self.html.find(
                         'div', class_='cCard__Reliability-Tender-data'
                     ).find('div', class_='cCard__Reliability-Tender-Block-C2'),
                     log=False
                 ).strip()
-                self.__supplier_data['Тендер']['выиграл'] = self.get_text(
+            except Exception:
+                self.__supplier_data['Тендер']['Участник'] = ''
+            try:
+                self.__supplier_data['Тендер']['Выиграл'] = self.get_text(
                     self.html.find(
                         'div', class_='cCard__Reliability-Tender-data'
                     ).find('div', class_='ws-flexbox ws-justify-content-between').next_sibling.find(
@@ -337,7 +352,7 @@ class Supplier(Browser):
                     log=False
                 ).strip()
             except Exception:
-                self.__supplier_data['Тендер'] = ''
+                self.__supplier_data['Тендер']['Выиграл'] = ''
             # Госконтракты
             try:
                 self.__supplier_data['Госконтракты'] = self.get_text(
@@ -348,14 +363,17 @@ class Supplier(Browser):
                 ).strip()
             except Exception:
                 self.__supplier_data['Госконтракты'] = ''
+            self.__supplier_data['Надежность'] = {}
             try:
-                self.__supplier_data['Надежность'] = {}
                 self.__supplier_data['Надежность']['Плюсы'] = self.get_text(
                     self.html.find(
                         'div', class_='analytics-ReliabilitySbisRu__subHeaderGreen analytics-ReliabilitySbisRu__right'
                     ),
                     log=False
                 ).strip()
+            except Exception:
+                self.__supplier_data['Надежность']['Плюсы'] = ''
+            try:
                 self.__supplier_data['Надежность']['Минусы'] = self.get_text(
                     self.html.find(
                         'div', class_='analytics-ReliabilitySbisRu__subHeaderRed analytics-ReliabilitySbisRu__right'
@@ -363,7 +381,7 @@ class Supplier(Browser):
                     log=False
                 ).strip()
             except Exception:
-                self.__supplier_data['Надежность'] = ''
+                self.__supplier_data['Надежность']['Минусы'] = ''
 
             # TODO отзывы
         return True
