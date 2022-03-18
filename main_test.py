@@ -8,7 +8,6 @@ def main():
     items_and_shops = {}
     time = datetime.now()
 
-    # output = open('source/output.txt', 'w', encoding='utf-8')
     for i in range(3):
         # Чтение одной строки из эксель файла
         current_item = excel_input_file.readline().structurizedata(excel_params1, excel_params2)
@@ -61,10 +60,7 @@ def main():
         excel_output_file.output_in_cell(current_item['поиск'])
         excel_output_file.save()
         excel_output_file.new_sheet()
-        # output.write(f'{current_item["поиск"]}\n')
         # print(*markets_ranked, sep='\n', file=output)
-        # output.write(f'{markets_ranked}')
-        # output.write('-' * 15 + '\n')
         # print(current_item['поиск'])
         # pprint(markets_ranked)
 
