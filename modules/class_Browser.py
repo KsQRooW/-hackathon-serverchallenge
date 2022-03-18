@@ -27,6 +27,7 @@ class Browser:
         self.__options.add_argument("–disable-infobars")
         self.__options.add_argument("–enable-automation")
         self.__options.add_argument("--disable-notifications")
+        self.__options.add_argument('--log-level=3')
         self.__driver = Chrome(executable_path=path_webdriver, options=self.__options)
         self.__driver.timeouts = timeouts
 
