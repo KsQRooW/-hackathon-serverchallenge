@@ -2,14 +2,15 @@ import re
 from string import punctuation
 from pymorphy3 import MorphAnalyzer
 
+# Регулярное выражение для запрещенных форматов в поисковом запросе
 stop_extensions = r'(\.pdf\Z)|(\.xls\Z)|(\.xlsx\Z)|(\.swf\Z)|(\.ps\Z)|(\.dwf\Z)|(\.kml\Z)|' \
                   r'(\.kmz\Z)|(\.gpx\Z)|(\.hwp\Z)|(\.ppt\Z)|(\.pptx\Z)|(\.doc\Z)|(\.docx\Z)|' \
                   r'(\.odp\Z)|(\.ods\Z)|(\.odt\Z)|(\.rtf\Z)|(\.svg\Z)|(\.tex\Z)|(\.txt\Z)|' \
                   r'(\.text \Z)|(\.wml\Z)|(\.wap\Z)|(\.xml\Z)'
 
-gost = r'((?:гост|гост р исо|din)\D?\s?\D?\s?\d+)'
-inn = r'инн\D?\s?\D?\s?\d{10,12}'
-digits = r'\d+'
+gost = r'((?:гост|гост р исо|din)\D?\s?\D?\s?\d+)'  # Регулярное выражение для поиска ГОСТа
+inn = r'инн\D?\s?\D?\s?\d{10,12}'  # Регулярное выражение для поиска ИНН
+digits = r'\d+'  # Регулярное выражение для поиска подряд идущих цифр
 
 
 class Text:
@@ -27,9 +28,11 @@ class Text:
             raise TypeError(f"Передан класс {type(word)}. Ожидался класс str или set.")
         self.__word = word
 
+    # Очистка слов
     def clean(self):
         self.word = ''
 
+    # Удаление пунктуации/служебных символов из слова
     @staticmethod
     def punct_remover(word: str, set_punctuation):
         intersection = set_punctuation.intersection(word)
@@ -84,6 +87,7 @@ class Text:
             for line in file:
                 self.word.add(line.lower().strip())
 
+    # Проверка присутствия необходимого ГОСТа(-ов) среди ГОСТов со страницы товара в магазине
     @staticmethod
     def gost_check(text, parameters):
         on_site = re.findall(gost, text)
@@ -97,6 +101,7 @@ class Text:
             return True
         return False
 
+    # Поиск наименования компании на странице магазина при помощи регулярных выражений
     @staticmethod
     def name_find(text, org_types):
         names = set()
