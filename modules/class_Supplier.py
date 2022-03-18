@@ -6,7 +6,7 @@ import re
 from datetime import datetime
 
 
-class Supplier(Browser):
+class Supplier(Browser):    # Класс для работы с поставщиками
 
     def __init__(self):
         super().__init__()
@@ -72,6 +72,7 @@ class Supplier(Browser):
                     logger.WARN('Wrong site', self.get_text(item.find('span', class_='highlight')))    # debug
         return True
 
+    # Из нескольких найденных ИНН выбрать один (более новый)
     def __select_one_inn(self):
         general_url = 'https://sbis.ru/contragents/'
         dates = {}
@@ -89,10 +90,12 @@ class Supplier(Browser):
                 except Exception as er:
                     logger.FAIL('Date not found', err=repr(er))
                     continue
+                # Сохранение даты регистрации каждого ИНН
                 dates[datetime.strptime(strdate, '%d.%m.%Y')] = temp_inn
             else:
                 logger.WARN('INN ' + temp_inn + ' liquidated')
         if dates:
+            # Выбор ИНН с самой свежей датой регистрации
             self.__inn = dates[max(dates.keys())]
             logger.INFO('INN found: ' + self.inn)
             return True
@@ -100,6 +103,7 @@ class Supplier(Browser):
             logger.FAIL('INN not found in database spark-interfax')
             return False
 
+    # Ранжирование поставщиков
     def ranking(self, koefs=None):
         # keys = ('Госконтракты', 'Истец', 'Надежность', 'Ответчик', 'Прибыль', 'Уставный капитал', 'Тендер', 'Выручка', 'Стоимость')
         if koefs:
@@ -162,6 +166,7 @@ class Supplier(Browser):
     def supplier_data(self):
         return self.__supplier_data
 
+    # Парсинг юридической информации по поставщику из бд СБИС
     def parse_supplier_data(self):
         logger.INFO('Start parsing supplier info', self.website)
         self.__supplier_data = {}
@@ -384,16 +389,5 @@ class Supplier(Browser):
                 ).strip()
             except Exception:
                 self.__supplier_data['Надежность']['Минусы'] = ''
-
             # TODO отзывы
         return True
-
-"""
-Поиск ИНН по названию компании
-https://sbis.ru/contragents
-https://spark-interfax.ru/search
-https://www.audit-it.ru/contragent/
-https://www.kartoteka.ru/
-https://www.list-org.com/search
-https://classinform.ru/proverka-kontragenta.html
-"""
