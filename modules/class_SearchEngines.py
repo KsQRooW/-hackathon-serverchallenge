@@ -42,19 +42,13 @@ class Google(Browser):
     def google_search(self, text):
         self.search = text
         connect_url = self.general_url + self.search + self.__start
-
-        # self.get(connect_url, time=2, google=True)
         self.get(connect_url, selen=True)
-        # self.__headers['Cookie'] = self.cookie
 
     # метод поиска текста на сайте, используя встроенные средства Google
     # пример: google_search_text_on_site(ИНН, vk.com) -> запрос в Google: ИНН site:vk.com
     def google_search_inn_on_site(self, site_domain):
         connect_url = self.general_url + 'инн' + ' site%3A' + site_domain
-
-        # self.get(connect_url, time=2, google=True)
         self.get(connect_url, selen=True)
-        # self.__headers['Cookie'] = self.cookie
 
         self.parse_google_description()
         inns = re.findall(inn, self.description, flags=re.I)
@@ -62,8 +56,8 @@ class Google(Browser):
             return None
         inns_digits = tuple(map(lambda x: re.search(digits, x).group(), inns))
         inns_counts = set(map(lambda x: (x, inns.count(x)), inns_digits))
-        max_inn = max(inns_counts, key=lambda x: x[1])[0]
-        return max_inn  # Самый часто встрчаемый ИНН на странице
+        max_inn = max(inns_counts, key=lambda x: x[1])[0]  # Самый часто встрчаемый ИНН на странице
+        return max_inn
 
     # Парсинг ссылок с поискового запроса Google
     # Корректнее вызывать функцию после любой функции типа google_search...
@@ -85,6 +79,7 @@ class Google(Browser):
                 logger.WARN(f"{check_stop_extensions.group()} file not a website", clear_url)
         return markets_urls
 
+    # Рекурсионный поиск по дереву div'ов, в которых лежит описание страницы (краткая информация)
     def __recursion_find(self, s, check=True):
         divs = s.find_all('div', recursive=False)
         if divs:
@@ -99,17 +94,9 @@ class Google(Browser):
         elif s.find_previous('div').find('a', recursive=False) is None:
             self.description += s.text + ' '
 
+    # Парсинг описания под ссылками из поискового запроса
     def parse_google_description(self):
         self.description = ''
         divs = self.html.find('body').find('div', {'id': 'main'})
         self.__recursion_find(divs)
         return self.description
-
-    """
-    def parse_google_description(self):
-        self.description = ''
-        divs = self.html.find('div', id='main').find_all('div', class_='BNeawe s3v9rd AP7Wnd')
-        for div in divs:
-            if div.next.name is None:
-                self.description += div.text + ' '
-    """
