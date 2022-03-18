@@ -194,7 +194,20 @@ class Supplier(Browser):
                 ).strip()
             except Exception:
                 self.__supplier_data['Адрес'] = ''
-            # TODO телефон, почта если есть
+            # Контакты
+            self.__supplier_data['Контакты'] = {}
+            try:
+                self.__supplier_data['Контакты']['Телефон'] = self.get_text(
+                    self.html.find('div', itemprop='telephone'), log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Контакты']['Телефон'] = ''
+            try:
+                self.__supplier_data['Контакты']['email'] = self.get_text(
+                    self.html.find('a', itemprop='email'), log=False
+                ).strip()
+            except Exception:
+                self.__supplier_data['Контакты']['email'] = ''
             # Дата регистрации
             inf = self.get_text(self.html.find('div', class_='cCard__CompanyDescription'), log=False)
             try:
