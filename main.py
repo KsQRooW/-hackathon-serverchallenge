@@ -13,7 +13,6 @@ from datetime import datetime
 def main():
     items_and_shops = {}
     time = datetime.now()
-
     for i in range(excel_input_line_number):
         # Чтение одной строки из эксель файла
         current_item = excel_input_file.readline().structurizedata(excel_params1, excel_params2)
