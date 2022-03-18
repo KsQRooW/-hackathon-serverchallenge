@@ -43,16 +43,18 @@ class Google(Browser):
         self.search = text
         connect_url = self.general_url + self.search + self.__start
 
-        self.get(connect_url, time=2, google=True)
-        self.__headers['Cookie'] = self.cookie
+        # self.get(connect_url, time=2, google=True)
+        self.get(connect_url, selen=True)
+        # self.__headers['Cookie'] = self.cookie
 
     # метод поиска текста на сайте, используя встроенные средства Google
     # пример: google_search_text_on_site(ИНН, vk.com) -> запрос в Google: ИНН site:vk.com
     def google_search_inn_on_site(self, site_domain):
         connect_url = self.general_url + 'инн' + ' site%3A' + site_domain
 
-        self.get(connect_url, time=2, google=True)
-        self.__headers['Cookie'] = self.cookie
+        # self.get(connect_url, time=2, google=True)
+        self.get(connect_url, selen=True)
+        # self.__headers['Cookie'] = self.cookie
 
         self.parse_google_description()
         inns = re.findall(inn, self.description, flags=re.I)

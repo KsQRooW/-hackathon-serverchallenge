@@ -22,6 +22,8 @@ path_market_words = 'source/market_words.txt'
 
 path_org_types = 'source/org_types.txt'
 
+path_webdriver = 'source/chromedriver.exe'
+
 excel_params1 = {'стандарт': 'ГОСТ',                        # Параметры товаров 1 типа
                  'покрытие': 'покрытие',
                  'головка': 'головка',

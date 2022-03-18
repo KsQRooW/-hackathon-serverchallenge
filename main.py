@@ -1,4 +1,4 @@
-from modules import excel_input_line_number, excel_input_file, excel_params1, excel_params2     # Excel
+from modules import excel_input_line_number, excel_input_file, excel_params1, excel_params2, excel_output_file  # Excel
 from modules import market_shop_browser, market_words                                           # Shop
 from modules import google_browser, num_google_pages                                            # Google
 from modules import supplier_browser                                                            # Supplier
@@ -8,12 +8,12 @@ from datetime import datetime
 
 def main():
     items_and_shops = {}
-    # time = datetime.now()
-    output = open('source/output.txt', 'w', encoding='utf-8')
+    time = datetime.now()
+
     for i in range(excel_input_line_number):
         # Чтение одной строки из эксель файла
         current_item = excel_input_file.readline().structurizedata(excel_params1, excel_params2)
-        # pprint(current_item)
+        print(f"----- {current_item['поиск']} -----")
         markets_ranked = []
         # Три страницы поисковой выдачи
         for number in range(num_google_pages):
@@ -46,18 +46,18 @@ def main():
                                     items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
                                 else:
                                     items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
-        # markets_ranked.sort(key=lambda x: x['RANK'], reverse=True)
-        # TODO вывод в эксель
-        output.write(f'{current_item["поиск"]}\n')
-        output.write(f'{markets_ranked}')
-        output.write('-' * 15)
-        # print(current_item['поиск'])
-        # pprint(markets_ranked)
 
-    # pprint(items_and_shops)
-    # print(datetime.now() - time)
+        markets_ranked.sort(key=lambda x: x['Рейтинг'], reverse=True)
+        excel_output_file.output_col_names(markets_ranked[0])
+        for market in markets_ranked:
+            excel_output_file.output_values(market)
+        excel_output_file.auto_size_cols()
+        excel_output_file.output_in_cell(current_item['поиск'])
+        excel_output_file.save()
+        excel_output_file.new_sheet()
 
     excel_input_file.close_file()
+    print(datetime.now() - time)
 
 
 if __name__ == '__main__':

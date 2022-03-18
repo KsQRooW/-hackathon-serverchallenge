@@ -1,10 +1,11 @@
 from urllib import parse
-from .config import headers, proxies, Blacklist
+from .config import headers, proxies, Blacklist, path_webdriver
 from .class_Logs import logger
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from selenium.webdriver import Chrome, ChromeOptions
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -15,10 +16,22 @@ class Browser:
         self.__headers.pop('Cookie')
         self.__proxies = proxies.copy()
         self.__html = BeautifulSoup()
+
+        self.__options = ChromeOptions()
+        self.__options.add_argument('headless')
+        self.__options.add_argument("–disable-infobars")
+        self.__options.add_argument("–enable-automation")
+        self.__options.add_argument("--disable-notifications")
+        self.__driver = Chrome(executable_path=path_webdriver, options=self.__options)
+
         self.__domain_has = False
         self.__domain = None
         self.__url = None
         self.__cookie = None
+
+    @property
+    def driver(self):
+        return self.__driver
 
     @property
     def cookie(self):
@@ -85,7 +98,15 @@ class Browser:
     def html_clear(self):
         self.html = ''
 
-    def __connect(self, url, time, google, verify=True, info='Connecting to'):
+    def __selen_connect(self, url, info):
+        logger.INFO(info, url)
+        self.driver.get(url)
+        self.html = BeautifulSoup(self.driver.page_source, 'lxml')
+
+    def __connect(self, url, time, google, selen, verify=True, info='Connecting to'):
+        if selen:
+            self.__selen_connect(url, info)
+            return
         sleep(time)
         logger.INFO(info, url)
         response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=verify)
@@ -94,17 +115,17 @@ class Browser:
         response.raise_for_status()
         self.html = BeautifulSoup(response.text, 'lxml')
 
-    def get(self, url, time=0, google=False):
+    def get(self, url, time=0, google=False, selen=False):
         self.url = url
         if self.domain in Blacklist:
             logger.WARN('Website in Blacklist', self.url)
             return None
         try:
-            self.__connect(url, time, google)
+            self.__connect(url, time, google, selen)
         except Exception as err:
             logger.WARN('Failed connect to', url, repr(err))
             try:
-                self.__connect(url, time, google, verify=False, info='Reconnecting to')
+                self.__connect(url, time, google, selen, verify=False, info='Reconnecting to')
             except Exception as err:
                 logger.FAIL('Not connected to', url, repr(err))
                 return None

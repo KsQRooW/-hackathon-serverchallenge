@@ -78,7 +78,8 @@ class Supplier(Browser):
         logger.INFO('Search for the newest INN')
         for temp_inn in self.__list_inn:
             url = general_url + temp_inn
-            self.get(url, time=2)
+            # self.get(url, time=2)
+            self.get(url, selen=True)
             # Проверка действующая ли компания или нет
             liquidated = self.get_text(self.html.find('div', class_='c-sbisru-CardStatus__closed'), log=False)
             if not liquidated:
@@ -100,7 +101,7 @@ class Supplier(Browser):
             return False
 
     def ranking(self, koefs=None):
-        keys = ('Госконтракты', 'Истец', 'Надежность', 'Ответчик', 'Прибыль', 'Уставный капитал', 'Тендер', 'Выручка', 'Стоимость')
+        # keys = ('Госконтракты', 'Истец', 'Надежность', 'Ответчик', 'Прибыль', 'Уставный капитал', 'Тендер', 'Выручка', 'Стоимость')
         if koefs:
             coefs = koefs
         else:
@@ -142,8 +143,8 @@ class Supplier(Browser):
             value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Прибыль'])
             rating += sokr[key] * float(value) * coefs[5]
         if self.__supplier_data['Тендер'] != '':
-            win = self.__supplier_data['Тендер']['выиграл']
-            just = self.__supplier_data['Тендер']['участник']
+            win = self.__supplier_data['Тендер']['Выиграл']
+            just = self.__supplier_data['Тендер']['Участник']
             if win != '':
                 if just != '' and just != '0':
                     rating += int(win) / int(just) * coefs[6]
@@ -166,7 +167,8 @@ class Supplier(Browser):
         self.__supplier_data = {}
         general_url = 'https://sbis.ru/contragents/'
         url = general_url + self.inn
-        self.get(url, time=2)
+        # self.get(url, time=2)
+        self.get(url, selen=True)
         # Проверка действующая ли компания или нет
         liquidated = self.get_text(self.html.find('div', class_='c-sbisru-CardStatus__closed'), log=False)
         if liquidated:

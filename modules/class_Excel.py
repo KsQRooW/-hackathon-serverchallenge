@@ -1,6 +1,5 @@
 from openpyxl import open, Workbook
 from openpyxl import styles
-from openpyxl.cell import MergedCell
 import re
 
 
@@ -19,7 +18,7 @@ class Excel:
     def auto_size_cols(self):
         for col in self.file.active.columns:
             max_length = max(map(lambda x: len(x.value or ''), col))
-            column_letter = col[0].column_letter  # Get the column name
+            column_letter = col[-1].column_letter  # Get the column name
             new_width = (max_length + 1) * 1.2
             self.file.active.column_dimensions[column_letter].width = new_width
 
@@ -83,18 +82,29 @@ class Excel:
 
     def output_in_cell(self, value, cell=None):
         if not cell:
-            self.__output_name(value, 'A1')
+            self.__output_name(value)
         else:
             self.file.active[cell] = value
 
-    def __output_name(self, value, cell):
-        self.file.active[cell] = value
-        self.file.active[cell].font = styles.Font(bold=True, size=12)
+    def __output_name(self, value):
+        # index = self.file.active.max_row + 1
+        self.file.active["A1"] = value
+        # self.file.active.merge_cells(f"A{index}:C{index}")
+        self.file.active.merge_cells(start_row=1,
+                                     start_column=1,
+                                     end_row=1,
+                                     end_column=self.file.active.max_column)
+        self.file.active["A1"].font = styles.Font(bold=True, size=12, color="000066CC")
+        self.file.active["A1"].alignment = styles.Alignment(horizontal='center', vertical='center')
 
     def new_sheet(self):
         new_index = len(self.file.get_sheet_names()) + 1
         self.file.create_sheet(f"Sheet_{new_index}")
-        self.file = self.file[f"Sheet_{new_index}"]
+        self.file.active = new_index - 1
+        # self.file = self.file[f"Sheet_{new_index}"]
+
+    def count_sheets(self):
+        return len(self.file.get_sheet_names())
 
     def save(self, path=None):
         if path:
