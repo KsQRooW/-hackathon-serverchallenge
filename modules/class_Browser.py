@@ -12,6 +12,8 @@ timeouts = Timeouts()
 timeouts.implicit_wait = 7
 timeouts.page_load = 7
 timeouts.script = 7
+
+
 # requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
@@ -22,19 +24,22 @@ class Browser:
         self.__proxies = proxies.copy()
         self.__html = BeautifulSoup()
 
+        # Веб-драйвер и настройки для Selenium
         self.__options = ChromeOptions()
         self.__options.add_argument('headless')
         self.__options.add_argument("–disable-infobars")
         self.__options.add_argument("–enable-automation")
         self.__options.add_argument("--disable-notifications")
+        self.__options.add_argument("--log-level=3")
         self.__driver = Chrome(executable_path=path_webdriver, options=self.__options)
         self.__driver.timeouts = timeouts
 
-        self.__domain_has = False
+        self.__domain_has = False  # Проверка: был ли получен домен для текущего url
         self.__domain = None
         self.__url = None
         self.__cookie = None
 
+    # Завершение работы веб-драйвера
     def close_driver(self):
         self.driver.close()
 
@@ -60,6 +65,7 @@ class Browser:
             raise TypeError(f"Передан класс {type(value)}. Ожидался класс Bool.")
         self.__domain_has = value
 
+    # Возвращает весь текст с HTML страницы
     @staticmethod
     def get_text(item, log=True):
         try:
@@ -79,6 +85,7 @@ class Browser:
         self.__url = url
         self.domain_has = False
 
+    # При вызове свойства domain из url'а вычленяется его домен
     @property
     def domain(self):
         if not self.url:
@@ -87,6 +94,7 @@ class Browser:
             self.__domain = self.domain_parser(self.url)
         return self.__domain
 
+    # Функция вычленения домена из ссылки (без www)
     @staticmethod
     def domain_parser(url):
         domain = parse.urlsplit(url).netloc
@@ -94,6 +102,7 @@ class Browser:
             return domain[4:]
         return domain
 
+    # Получение кода HTML страницы по текущему url
     @property
     def html(self):
         return self.__html
@@ -104,14 +113,13 @@ class Browser:
             raise TypeError(f"Передан класс {type(soup)}. Ожидался класс BeautifulSoup.")
         self.__html = soup
 
-    def html_clear(self):
-        self.html = ''
-
+    # Отправка GET запроса странице при помощи Selenium
     def __selen_connect(self, url, info):
         logger.INFO(info, url)
         self.driver.get(url)
         self.html = BeautifulSoup(self.driver.page_source, 'lxml')
 
+    # Отправка GET запроса странице при помощи requests
     def __connect(self, url, time, google, selen, verify=True, info='Connecting to'):
         if selen:
             self.__selen_connect(url, info)
@@ -119,11 +127,9 @@ class Browser:
         sleep(time)
         logger.INFO(info, url)
         response = requests.get(url=url, headers=self.__headers, timeout=(5, 5), verify=verify)
-        if google and response.status_code == 200:
-            self.cookie = response.cookies
-        response.raise_for_status()
         self.html = BeautifulSoup(response.text, 'lxml')
 
+    # Функция отправки серии GET запросов странице (либо requests, либо Selenium)
     def get(self, url, time=0, google=False, selen=False):
         self.url = url
         if self.domain in Blacklist:

@@ -1,5 +1,5 @@
-import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+# import requests
+# from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from modules import excel_input_line_number, excel_input_file, excel_params1, excel_params2, excel_output_file  # Excel
 from modules import market_shop_browser, market_words                                           # Shop
 from modules import google_browser, num_google_pages                                            # Google
@@ -7,7 +7,7 @@ from modules import supplier_browser                                            
 from pprint import pprint
 from datetime import datetime
 
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 def main():
@@ -42,7 +42,7 @@ def main():
                                     continue
                             # Парсинг информации по поставщику
                             if supplier_browser.parse_supplier_data():
-                                pprint(supplier_browser.supplier_data)
+                                # pprint(supplier_browser.supplier_data)
                                 # Присвоения ранга магазину
                                 supplier_browser.ranking()
                                 markets_ranked.append(supplier_browser.supplier_data)
@@ -51,7 +51,7 @@ def main():
                                 else:
                                     items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
 
-        markets_ranked.sort(key=lambda x: x['Рейтинг'], reverse=True)
+        markets_ranked.sort(key=lambda x: float(x['Рейтинг']), reverse=True)
         excel_output_file.output_col_names(markets_ranked[0])
         for market in markets_ranked:
             excel_output_file.output_values(market)
