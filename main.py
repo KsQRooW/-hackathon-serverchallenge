@@ -38,7 +38,7 @@ def main():
                                     continue
                             # Парсинг информации по поставщику
                             if supplier_browser.parse_supplier_data():
-                                # pprint(supplier_browser.supplier_data)
+                                pprint(supplier_browser.supplier_data)
                                 # Присвоения ранга магазину
                                 supplier_browser.ranking()
                                 markets_ranked.append(supplier_browser.supplier_data)
@@ -46,7 +46,7 @@ def main():
                                     items_and_shops[current_item['поиск']].add((market_shop_browser.url, supplier_browser.inn))
                                 else:
                                     items_and_shops.setdefault(current_item['поиск'], {(market_shop_browser.url, supplier_browser.inn)})
-        markets_ranked.sort(key=lambda x: x['RANK'], reverse=True)
+        # markets_ranked.sort(key=lambda x: x['RANK'], reverse=True)
         # TODO вывод в эксель
         output.write(f'{current_item["поиск"]}\n')
         output.write(f'{markets_ranked}')
