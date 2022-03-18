@@ -9,6 +9,7 @@
 На выходе – воспроизводимый код и презентация сервиса.
 ## Требования
 - Python 3.10
+- pip 22.0.4
 - Библиотеки:
   - requests
   - bs4
@@ -19,9 +20,18 @@
   - datetime
   - string
   - pymorphy3
+  - selenium
 ## Запуск
+Перейти в папку проекта
 ```
 cd Documents\GitHub\hackathon-serverchallenge
+```
+Установить необходимые библиотеки
+```
+pip install -r requirements.txt
+```
+Запустить main.py
+```
 python main.py
 ```
 ## Идеи
