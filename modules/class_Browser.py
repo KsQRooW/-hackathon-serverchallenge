@@ -1,4 +1,5 @@
 from urllib import parse
+from selenium.webdriver.common.timeouts import Timeouts
 from .config import headers, proxies, Blacklist, path_webdriver
 from .class_Logs import logger
 import requests
@@ -7,6 +8,10 @@ from time import sleep
 # from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from selenium.webdriver import Chrome, ChromeOptions
 
+timeouts = Timeouts()
+timeouts.implicit_wait = 7
+timeouts.page_load = 7
+timeouts.script = 7
 # requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
@@ -22,12 +27,8 @@ class Browser:
         self.__options.add_argument("–disable-infobars")
         self.__options.add_argument("–enable-automation")
         self.__options.add_argument("--disable-notifications")
-        self.__options.add_argument('--log-level=3')
-        # self.__options.add_argument('--ignore-certificate-errors')
-        # self.__options.add_argument('--ignore-certificate-errors-spki-list')
-        # self.__options.add_argument('--ignore-ssl-errors')
         self.__driver = Chrome(executable_path=path_webdriver, options=self.__options)
-        # self.__driver = Chrome(executable_path=path_webdriver, options=self.__options, service_log_path='t.txt')
+        self.__driver.timeouts = timeouts
 
         self.__domain_has = False
         self.__domain = None

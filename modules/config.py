@@ -9,7 +9,6 @@ login = 'exfC7g'
 password = '2x9VWu'
 proxy = '217.29.63.159:10667'
 
-
 proxies = {
            'https': f'http://{login}:{password}@{proxy}'    # https Russia - 20ms
 }
