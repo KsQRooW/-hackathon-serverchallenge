@@ -1,9 +1,13 @@
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from modules import excel_input_line_number, excel_input_file, excel_params1, excel_params2, excel_output_file  # Excel
 from modules import market_shop_browser, market_words                                           # Shop
 from modules import google_browser, num_google_pages                                            # Google
 from modules import supplier_browser                                                            # Supplier
 from pprint import pprint
 from datetime import datetime
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 def main():

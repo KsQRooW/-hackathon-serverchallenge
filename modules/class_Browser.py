@@ -4,10 +4,10 @@ from .class_Logs import logger
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+# from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from selenium.webdriver import Chrome, ChromeOptions
 
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 class Browser:
@@ -28,6 +28,9 @@ class Browser:
         self.__domain = None
         self.__url = None
         self.__cookie = None
+
+    def close_driver(self):
+        self.driver.close()
 
     @property
     def driver(self):
