@@ -81,7 +81,10 @@ class Google(Browser):
 
     # Рекурсионный поиск по дереву div'ов, в которых лежит описание страницы (краткая информация)
     def __recursion_find(self, s, check=True):
-        divs = s.find_all('div', recursive=False)
+        try:
+            divs = s.find_all('div', recursive=False)
+        except AttributeError:
+            return
         if divs:
             if check:  # Для первого прохода по div'ам
                 for div in divs[3:]:

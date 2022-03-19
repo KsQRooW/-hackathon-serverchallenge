@@ -1,10 +1,10 @@
+from copy import deepcopy
 from .class_Browser import Browser
 from .class_Text import Text, inn
 from .class_Logs import logger
-from time import sleep
 import re
 from datetime import datetime
-from .config import supplier_sorting_params
+from .config import supplier_sorting_params, ideal_supplier_parameters
 
 
 class Supplier(Browser):    # Класс для работы с поставщиками
@@ -163,11 +163,82 @@ class Supplier(Browser):    # Класс для работы с поставщи
             rating += sokr[key] * float(value) * coefs[8]
         self.__supplier_data['Рейтинг'] = "{0:.2f}".format(rating)
 
-    # Ранжирование поставщиков (все сразу)
-    def sorting(self, markets):
-        for param in supplier_sorting_params.keys():
-            pass
+    @staticmethod
+    def clearing(markets, coefs):
+        sokr = {'млн ₽': 1000000, 'тыс ₽': 1000, 'млрд ₽': 1000000000}
+        for market in markets:
+            for key in coefs:
+                key_0 = key.split(', ')[0]
+                val = market[key_0]
+                if isinstance(val, dict):
+                    for k in val:
+                        nominal = re.search(r'млн ₽|тыс ₽|млрд ₽', val[k])
+                        if val[k] and nominal:
+                            market[key_0][k] = str(
+                                float(re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', val[k])) * sokr[nominal.group()])
+                        else:
+                            market[key_0][k] = re.sub(r'\+|\-|\%', r'', val[k])
+                else:
+                    nominal = re.search(r'млн ₽|тыс ₽|млрд ₽', val)
+                    if val and nominal:
+                        market[key_0] = str(float(re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', val)) * sokr[nominal.group()])
+                    else:
+                        market[key_0] = re.sub(r'\+|\-|\%', r'', val)
+        return markets
 
+    @staticmethod
+    def normalize(markets: list[dict], coefs):
+        val_for_coefs = []
+        for name_coef in coefs:
+            words_name_coef = name_coef.split(', ')
+            if len(words_name_coef) == 1:
+                x = list(map(lambda m: m[name_coef], markets))
+                if 'дата' in map(lambda w: w.lower(), words_name_coef[0].split()):
+                    try:
+                        days_x = list(map(lambda d: datetime.now() - datetime.strptime(d, '%d.%m.%Y'), x))
+                        max_day = max(days_x)
+                        norm_x = list(map(lambda d: d / max_day, days_x))
+                    except Exception:
+                        norm_x = [0] * len(markets)
+                else:
+                    try:
+                        max_x = max(map(lambda z: float(z), x))
+                        norm_x = list(map(lambda v: float(v) / max_x, x))
+                    except Exception:
+                        norm_x = [0] * len(markets)
+            else:
+                solv_expr = words_name_coef[1]
+                for word in set(words_name_coef[1].split()):
+                    val = markets[0][words_name_coef[0]].get(word, None)
+                    if val == '':
+                        val = '0'
+                        solv_expr = solv_expr.replace(word, val)
+                    elif val:
+                        solv_expr = solv_expr.replace(word, f"float(m['{words_name_coef[0]}']['{word}'])")
+                try:
+                    x = list(map(lambda m: eval(solv_expr), markets))
+                    max_x = max(x)
+                    norm_x = list(map(lambda v: v / max_x, x))
+                except Exception:
+                    norm_x = [0] * len(markets)
+            val_for_coefs.append(norm_x)
+        return val_for_coefs
+
+    # Нормализация данных
+    def new_ranking(self, markets: list[dict], coefs=supplier_sorting_params):
+        copy_markets = deepcopy(markets)
+        copy_markets.append(ideal_supplier_parameters)
+
+        clear_markets = self.clearing(copy_markets, coefs)
+        val_for_coefs = self.normalize(clear_markets, coefs)
+
+        raiting = [0] * len(markets)
+        for val, k in zip(val_for_coefs, coefs.values()):
+            i_ratings = list(map(lambda x: x * k, val))
+            raiting = list(map(lambda a, b: a + b, raiting, i_ratings))
+        for i, market in enumerate(markets):
+            market['Рейтинг'] = "{0:.2f}".format(raiting[i])
+        return markets
 
     @property
     def supplier_data(self):

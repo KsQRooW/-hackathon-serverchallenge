@@ -9,9 +9,9 @@ from time import sleep
 from selenium.webdriver import Chrome, ChromeOptions
 
 timeouts = Timeouts()
-timeouts.implicit_wait = 7
-timeouts.page_load = 7
-timeouts.script = 7
+timeouts.implicit_wait = 15
+timeouts.page_load = 15
+timeouts.script = 15
 
 
 # requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
