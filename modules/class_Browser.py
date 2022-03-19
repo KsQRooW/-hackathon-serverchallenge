@@ -5,7 +5,7 @@ from .class_Logs import logger
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
-# from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from selenium.webdriver import Chrome, ChromeOptions
 
 timeouts = Timeouts()
@@ -14,7 +14,7 @@ timeouts.page_load = 15
 timeouts.script = 15
 
 
-# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 class Browser:

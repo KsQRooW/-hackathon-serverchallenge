@@ -2,7 +2,6 @@ from modules import excel_input_line_number, excel_input_file, excel_params1, ex
 from modules import market_shop_browser, market_words                                           # Shop
 from modules import google_browser, num_google_pages                                            # Google
 from modules import supplier_browser                                                            # Supplier
-from pprint import pprint
 from datetime import datetime
 
 
@@ -12,7 +11,6 @@ def main():
         # Чтение одной строки из эксель файла
         current_item = excel_input_file.readline().structurizedata(excel_params1, excel_params2)
         print(f"----- {current_item['поиск']} -----")
-        markets_ranked = []
         markets = []
         # Три страницы поисковой выдачи
         for number in range(num_google_pages):
@@ -37,19 +35,13 @@ def main():
                                     continue
                             # Парсинг информации по поставщику
                             if supplier_browser.parse_supplier_data():
-                                # pprint(supplier_browser.supplier_data)
-                                # Присвоения ранга магазину
-                                # supplier_browser.ranking()
-                                # markets_ranked.append(supplier_browser.supplier_data)
                                 markets.append(supplier_browser.supplier_data)
-
+        # Ранжирование поставщиков
         markets_ranked = supplier_browser.new_ranking(markets)
         markets_ranked.sort(key=lambda x: float(x['Рейтинг']), reverse=True)
         excel_output_file.output_col_names(markets_ranked[0])
         for market in markets_ranked:
             excel_output_file.output_values(market)
-        # pprint(markets)
-        # supplier_browser.sorting(markets)
         excel_output_file.auto_size_cols()
         excel_output_file.output_in_cell(current_item['поиск'])
         excel_output_file.save()
@@ -57,10 +49,10 @@ def main():
 
     excel_input_file.close_file()
     print(datetime.now() - time)
+    google_browser.close_driver()
+    market_shop_browser.close_driver()
+    supplier_browser.close_driver()
 
 
 if __name__ == '__main__':
     main()
-
-# google_browser.quit()
-# market_shop_browser.quit()

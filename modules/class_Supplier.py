@@ -259,6 +259,7 @@ class Supplier(Browser):    # Класс для работы с поставщи
             return False
         else:
             # self.__supplier_data['Статус'] = 'Действующее'      # Включаем только действующие
+            self.__supplier_data['Рейтинг'] = ''
             self.__supplier_data['Сайт'] = self.website
             # Парсинг
             try:
