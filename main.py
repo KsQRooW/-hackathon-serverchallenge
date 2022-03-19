@@ -13,6 +13,7 @@ def main():
         current_item = excel_input_file.readline().structurizedata(excel_params1, excel_params2)
         print(f"----- {current_item['поиск']} -----")
         markets_ranked = []
+        markets = []
         # Три страницы поисковой выдачи
         for number in range(num_google_pages):
             google_browser.start_page = number
@@ -38,13 +39,16 @@ def main():
                             if supplier_browser.parse_supplier_data():
                                 # pprint(supplier_browser.supplier_data)
                                 # Присвоения ранга магазину
-                                supplier_browser.ranking()
-                                markets_ranked.append(supplier_browser.supplier_data)
+                                # supplier_browser.ranking()
+                                # markets_ranked.append(supplier_browser.supplier_data)
+                                markets.append(supplier_browser.supplier_data)
 
-        markets_ranked.sort(key=lambda x: float(x['Рейтинг']), reverse=True)
-        excel_output_file.output_col_names(markets_ranked[0])
-        for market in markets_ranked:
-            excel_output_file.output_values(market)
+        # markets_ranked.sort(key=lambda x: float(x['Рейтинг']), reverse=True)
+        # excel_output_file.output_col_names(markets_ranked[0])
+        # for market in markets_ranked:
+        #     excel_output_file.output_values(market)
+        pprint(markets)
+        supplier_browser.sorting(markets)
         excel_output_file.auto_size_cols()
         excel_output_file.output_in_cell(current_item['поиск'])
         excel_output_file.save()

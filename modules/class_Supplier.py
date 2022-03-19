@@ -4,6 +4,7 @@ from .class_Logs import logger
 from time import sleep
 import re
 from datetime import datetime
+from .config import supplier_sorting_params
 
 
 class Supplier(Browser):    # Класс для работы с поставщиками
@@ -103,7 +104,7 @@ class Supplier(Browser):    # Класс для работы с поставщи
             logger.FAIL('INN not found in database spark-interfax')
             return False
 
-    # Ранжирование поставщиков
+    # Ранжирование поставщиков (для 1 поставщика)
     def ranking(self, koefs=None):
         # keys = ('Госконтракты', 'Истец', 'Надежность', 'Ответчик', 'Прибыль', 'Уставный капитал', 'Тендер', 'Выручка', 'Стоимость')
         if koefs:
@@ -161,6 +162,12 @@ class Supplier(Browser):    # Класс для работы с поставщи
             value = re.sub(r' млн ₽| тыс ₽| млрд ₽', r'', self.__supplier_data['Стоимость'])
             rating += sokr[key] * float(value) * coefs[8]
         self.__supplier_data['Рейтинг'] = "{0:.2f}".format(rating)
+
+    # Ранжирование поставщиков (все сразу)
+    def sorting(self, markets):
+        for param in supplier_sorting_params.keys():
+            pass
+
 
     @property
     def supplier_data(self):
