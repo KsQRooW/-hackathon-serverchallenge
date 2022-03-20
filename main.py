@@ -48,7 +48,7 @@ def main():
         excel_output_file.new_sheet()
 
     excel_input_file.close_file()
-    print(datetime.now() - time)
+    print('Completed successfully, elapsed time', datetime.now() - time)
     google_browser.close_driver()
     market_shop_browser.close_driver()
     supplier_browser.close_driver()

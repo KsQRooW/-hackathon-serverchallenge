@@ -1,0 +1,481 @@
+----- Манжета М60х80 ГОСТ 22704 -----
+<11:29:50> INFO: Connecting to https://www.google.com/search?q=Манжета М60х80 ГОСТ 22704&start=00
+<11:29:54> INFO: Connecting to http://vysota-17.ru/katalog/rezinotexnicheskie-izdeliya-(rti)/shevronnyie-uplotneniya-rezinotkanevyie-dlya-gidravlicheskix-ustrojstv-gost-22704-77(gost-9041-59)/manzhetyi-shevronnyie-gost-22704-77
+<11:29:54> INFO: Connecting to https://www.google.com/search?q=инн site%3Avysota-17.ru
+<11:29:56> INFO: Start INN search by the site address vysota-17.ru
+<11:29:57> INFO: Connecting to https://spark-interfax.ru/search?Query=vysota-17.ru
+<11:29:57> FAIL: INN not found in database spark-interfax 
+<11:29:57> INFO: Connecting to https://sibkraspolimer.ru/formovie-izdeliya/rti/uplotneniya-rezinotkanevye-shevronnye-dlya-gidravlicheskih-ustrojstv-gost-22704-77-gost-9041-59.html
+<11:29:59> INFO: Connecting to https://www.google.com/search?q=инн site%3Asibkraspolimer.ru
+<11:30:00> INFO: Start INN search by the site address sibkraspolimer.ru
+<11:30:01> INFO: Connecting to https://spark-interfax.ru/search?Query=sibkraspolimer.ru
+<11:30:04> WARN: Few INN found: 2404012397 2461022465 
+<11:30:04> INFO: Search for the newest INN 
+<11:30:04> INFO: Connecting to https://sbis.ru/contragents/2404012397
+<11:30:06> INFO: Connecting to https://sbis.ru/contragents/2461022465
+<11:30:09> INFO: INN found: 2404012397 
+<11:30:09> INFO: Start parsing supplier info sibkraspolimer.ru
+<11:30:09> INFO: Connecting to https://sbis.ru/contragents/2404012397
+<11:30:10> INFO: Connecting to https://ep-k.com.ua/p948376518-manzheta-shevronnaya-60h80.html
+<11:30:12> INFO: Connecting to https://www.google.com/search?q=инн site%3Aep-k.com.ua
+<11:30:14> INFO: Start INN search by the site address ep-k.com.ua
+<11:30:15> INFO: Connecting to https://spark-interfax.ru/search?Query=ep-k.com.ua
+<11:30:15> FAIL: INN not found in database spark-interfax 
+<11:30:15> INFO: Connecting to https://rez-bi.ru/catalog/manzhety_shevronnye_gost_22704_77/filter/clear/apply/?sort=manufacture_price_asc&PAGE_EL_COUNT=64
+<11:30:15> INFO: Connecting to https://www.google.com/search?q=инн site%3Arez-bi.ru
+<11:30:16> INFO: Start INN search by the site address rez-bi.ru
+<11:30:17> INFO: Connecting to https://spark-interfax.ru/search?Query=rez-bi.ru
+<11:30:19> WARN: Wrong site cservice@rez-bi.ru
+<11:30:19> FAIL: INN not found in database spark-interfax 
+<11:30:19> INFO: Connecting to https://prom.ua/Uplotneniya-shevronnye.html
+<11:30:21> INFO: Connecting to https://www.google.com/search?q=инн site%3Aprom.ua
+<11:30:22> INFO: Start INN search by the site address prom.ua
+<11:30:23> INFO: Connecting to https://spark-interfax.ru/search?Query=prom.ua
+<11:30:23> FAIL: INN not found in database spark-interfax 
+<11:30:23> INFO: Connecting to https://moskva.tiu.ru/p632049-manzhety-shevronnye-gost.html
+<11:30:23> WARN: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='moskva.tiu.ru', port=443): Max retries exceeded with url: /p632049-manzhety-shevronnye-gost.html (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000023C30E164A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))")) Failed connect to https://moskva.tiu.ru/p632049-manzhety-shevronnye-gost.html
+<11:30:23> INFO: Reconnecting to https://moskva.tiu.ru/p632049-manzhety-shevronnye-gost.html
+<11:30:23> FAIL: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='moskva.tiu.ru', port=443): Max retries exceeded with url: /p632049-manzhety-shevronnye-gost.html (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000023C30E16EF0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))")) Not connected to https://moskva.tiu.ru/p632049-manzhety-shevronnye-gost.html
+<11:30:23> INFO: Connecting to https://kazan.pulscen.ru/price/040208-manzhety-rezinovye/f:21_gost-22704-77
+<11:30:24> INFO: Connecting to https://www.google.com/search?q=инн site%3Akazan.pulscen.ru
+<11:30:25> INFO: Start INN search by the site address kazan.pulscen.ru
+<11:30:26> INFO: Connecting to https://spark-interfax.ru/search?Query=kazan.pulscen.ru
+<11:30:27> FAIL: INN not found in database spark-interfax 
+<11:30:27> INFO: Connecting to https://apz.in.ua/g99928956-manzheta-shevronnaya-gost22704
+<11:30:28> INFO: Connecting to https://www.google.com/search?q=инн site%3Aapz.in.ua
+<11:30:29> INFO: Start INN search by the site address apz.in.ua
+<11:30:30> INFO: Connecting to https://spark-interfax.ru/search?Query=apz.in.ua
+<11:30:30> FAIL: INN not found in database spark-interfax 
+<11:30:30> INFO: Connecting to https://appnn.ru/catalog/rti/manzhety/manzhety_shevronnye/
+<11:30:31> INFO: Connecting to https://www.google.com/search?q=инн site%3Aappnn.ru
+<11:30:32> INFO: Start INN search by the site address appnn.ru
+<11:30:33> INFO: Connecting to https://spark-interfax.ru/search?Query=appnn.ru
+<11:30:33> INFO: INN found: 5258030930 
+<11:30:33> INFO: Start parsing supplier info appnn.ru
+<11:30:33> INFO: Connecting to https://sbis.ru/contragents/5258030930
+<11:30:35> INFO: Connecting to https://www.google.com/search?q=Манжета М60х80 ГОСТ 22704&start=10
+<11:30:35> INFO: Connecting to http://yck74.ru/catalog/greider/?c=3&p=319
+<11:30:36> INFO: Connecting to https://www.google.com/search?q=инн site%3Ayck74.ru
+<11:30:37> INFO: Start INN search by the site address yck74.ru
+<11:30:38> INFO: Connecting to https://spark-interfax.ru/search?Query=yck74.ru
+<11:30:38> INFO: INN found: 7448141494 
+<11:30:38> INFO: Start parsing supplier info yck74.ru
+<11:30:38> INFO: Connecting to https://sbis.ru/contragents/7448141494
+<11:30:39> FAIL: Supplier liquidated! 
+<11:30:39> INFO: Connecting to http://www.specserver.com/zapchasti/spetstehnika/chsdm/a_120/dopolnitelnoe_oborudovanie/gidrosistema/gidrotsilindr_a121_43_17_000/manzheta_m60kh80_2_gost_22704_77/
+<11:30:40> INFO: Connecting to https://www.google.com/search?q=инн site%3Aspecserver.com
+<11:30:41> INFO: Start INN search by the site address specserver.com
+<11:30:42> INFO: Connecting to https://spark-interfax.ru/search?Query=specserver.com
+<11:30:42> INFO: INN found: 7722096600 
+<11:30:42> INFO: Start parsing supplier info specserver.com
+<11:30:42> INFO: Connecting to https://sbis.ru/contragents/7722096600
+<11:30:43> FAIL: Supplier liquidated! 
+<11:30:43> INFO: Connecting to https://abc-detali.ru/p369844194-manzheta-m60h80.html
+<11:30:43> WARN: SSLError(MaxRetryError('HTTPSConnectionPool(host=\'abc-detali.ru\', port=443): Max retries exceeded with url: /p369844194-manzheta-m60h80.html (Caused by SSLError(CertificateError("hostname \'abc-detali.ru\' doesn\'t match either of \'*.jino.ru\', \'jino.ru\'")))')) Failed connect to https://abc-detali.ru/p369844194-manzheta-m60h80.html
+<11:30:43> INFO: Reconnecting to https://abc-detali.ru/p369844194-manzheta-m60h80.html
+<11:30:43> WARN: Website is not a market https://abc-detali.ru/p369844194-manzheta-m60h80.html
+<11:30:43> INFO: Connecting to https://chzdt.ru/p79084236-koltso-60h80.html
+<11:30:44> WARN: Website is not a market https://chzdt.ru/p79084236-koltso-60h80.html
+<11:30:44> INFO: Connecting to http://polimer-prom.kiev.ua/%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%86%D0%B8%D1%8F/%D0%BC%D0%B0%D0%BD%D0%B6%D0%B5%D1%82%D1%8B_%D1%88%D0%B5%D0%B2%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5_%D0%B3%D0%BE%D1%81%D1%82_22704-77
+<11:30:45> INFO: Connecting to https://www.google.com/search?q=инн site%3Apolimer-prom.kiev.ua
+<11:30:46> INFO: Start INN search by the site address polimer-prom.kiev.ua
+<11:30:47> INFO: Connecting to https://spark-interfax.ru/search?Query=polimer-prom.kiev.ua
+<11:30:47> FAIL: INN not found in database spark-interfax 
+<11:30:47> INFO: Connecting to https://www.xn--80aaasbafk1acftx0c6n.xn--p1ai/acat/special/chsdm/a-120/gidrocilindr-a121-43-05-000
+<11:30:48> INFO: Connecting to https://www.google.com/search?q=инн site%3Axn--80aaasbafk1acftx0c6n.xn--p1ai
+<11:30:49> INFO: Start INN search by the site address xn--80aaasbafk1acftx0c6n.xn--p1ai
+<11:30:50> INFO: Connecting to https://spark-interfax.ru/search?Query=xn--80aaasbafk1acftx0c6n.xn--p1ai
+<11:30:50> FAIL: INN not found in database spark-interfax 
+<11:30:50> INFO: Connecting to https://impuls-ek.ru/catalog/shevronnye_uplotneniya_rezinotkanevye_manzhety/
+<11:30:51> INFO: Connecting to https://www.google.com/search?q=инн site%3Aimpuls-ek.ru
+<11:30:52> INFO: Start INN search by the site address impuls-ek.ru
+<11:30:53> INFO: Connecting to https://spark-interfax.ru/search?Query=impuls-ek.ru
+<11:30:53> WARN: Few INN found: 6670348122 6658304190 
+<11:30:53> INFO: Search for the newest INN 
+<11:30:53> INFO: Connecting to https://sbis.ru/contragents/6670348122
+<11:30:55> INFO: Connecting to https://sbis.ru/contragents/6658304190
+<11:30:57> WARN: INN 6658304190 liquidated 
+<11:30:57> INFO: INN found: 6670348122 
+<11:30:57> INFO: Start parsing supplier info impuls-ek.ru
+<11:30:57> INFO: Connecting to https://sbis.ru/contragents/6670348122
+<11:30:57> INFO: Connecting to https://www.konsulavto.ru/acat/special/chsdm/a-120/gidrocilindr-a121-43-17-000
+<11:30:58> INFO: Connecting to https://www.google.com/search?q=инн site%3Akonsulavto.ru
+<11:30:59> INFO: Start INN search by the site address konsulavto.ru
+<11:31:00> INFO: Connecting to https://spark-interfax.ru/search?Query=konsulavto.ru
+<11:31:01> WARN: Wrong site antonov@konsulavto.ru
+<11:31:01> INFO: INN found: 5027096299 
+<11:31:01> INFO: Start parsing supplier info konsulavto.ru
+<11:31:01> INFO: Connecting to https://sbis.ru/contragents/5027096299
+<11:31:01> INFO: Connecting to https://www.autoopt.ru/auto/catalog/special/chsdm/chsdm-a-120/124
+<11:31:02> INFO: Connecting to https://www.google.com/search?q=инн site%3Aautoopt.ru
+<11:31:03> INFO: Start INN search by the site address autoopt.ru
+<11:31:04> INFO: Connecting to https://spark-interfax.ru/search?Query=autoopt.ru
+<11:31:05> WARN: Wrong site irinanp@autoopt.ru
+<11:31:05> WARN: Wrong site nailia@autoopt.ru
+<11:31:05> WARN: Wrong site marinavs1@autoopt.ru
+<11:31:05> WARN: Few INN found: 7720535919 5027126176 
+<11:31:05> INFO: Search for the newest INN 
+<11:31:05> INFO: Connecting to https://sbis.ru/contragents/7720535919
+<11:31:07> INFO: Connecting to https://sbis.ru/contragents/5027126176
+<11:31:08> WARN: INN 5027126176 liquidated 
+<11:31:08> INFO: INN found: 7720535919 
+<11:31:08> INFO: Start parsing supplier info autoopt.ru
+<11:31:08> INFO: Connecting to https://sbis.ru/contragents/7720535919
+<11:31:09> INFO: Connecting to https://bizorg.su/manzhety-shevronnye-r/p3956122-manzhety-shevronnye-gost-2270477
+<11:31:10> INFO: Connecting to https://www.google.com/search?q=инн site%3Abizorg.su
+<11:31:11> INFO: Start INN search by the site address bizorg.su
+<11:31:12> INFO: Connecting to https://spark-interfax.ru/search?Query=bizorg.su
+<11:31:12> FAIL: INN not found in database spark-interfax 
+<11:31:12> INFO: Connecting to https://www.google.com/search?q=Манжета М60х80 ГОСТ 22704&start=20
+<11:31:13> WARN: .pdf file not a website https://files.stroyinf.ru/Data2/1/4294831/4294831222.pdf
+<11:31:13> INFO: Connecting to https://ecotop-nsk.ru/uslugi/produktsiya/manzheta/
+<11:31:14> INFO: Connecting to https://www.google.com/search?q=инн site%3Aecotop-nsk.ru
+<11:31:15> INFO: Start INN search by the site address ecotop-nsk.ru
+<11:31:16> INFO: Connecting to https://spark-interfax.ru/search?Query=ecotop-nsk.ru
+<11:31:17> INFO: INN found: 5404058559 
+<11:31:17> INFO: Start parsing supplier info ecotop-nsk.ru
+<11:31:17> INFO: Connecting to https://sbis.ru/contragents/5404058559
+<11:31:19> FAIL: Supplier liquidated! 
+<11:31:19> INFO: Connecting to https://rezina74.ru/catalog/manzhety-gryazesyemniki/manzhety-shevronnyye/
+<11:31:20> INFO: Connecting to https://www.google.com/search?q=инн site%3Arezina74.ru
+<11:31:21> INFO: Start INN search by the site address rezina74.ru
+<11:31:22> INFO: Connecting to https://spark-interfax.ru/search?Query=rezina74.ru
+<11:31:22> WARN: Wrong site ishop@rezina74.ru
+<11:31:22> INFO: INN found: 7451194400 
+<11:31:22> INFO: Start parsing supplier info rezina74.ru
+<11:31:22> INFO: Connecting to https://sbis.ru/contragents/7451194400
+<11:31:24> INFO: Connecting to https://din76.ru/autocatalog/spetstehnika/chsdm/a_120-702/gidrotsilindr__a121_43_17_000_/
+<11:31:26> INFO: Connecting to https://www.google.com/search?q=инн site%3Adin76.ru
+<11:31:27> INFO: Start INN search by the site address din76.ru
+<11:31:28> INFO: Connecting to https://spark-interfax.ru/search?Query=din76.ru
+<11:31:28> WARN: Wrong site dav@din76.ru
+<11:31:28> INFO: INN found: 7602106039 
+<11:31:28> INFO: Start parsing supplier info din76.ru
+<11:31:28> INFO: Connecting to https://sbis.ru/contragents/7602106039
+<11:31:30> WARN: Website in Blacklist https://docs.cntd.ru/document/1200017968
+<11:31:30> INFO: Connecting to https://autopiter.ru/russiancatalog/chsdm/pogruzchik-v-138/gidrocilindr--v1384303000--77
+<11:31:30> INFO: Connecting to https://www.google.com/search?q=инн site%3Aautopiter.ru
+<11:31:31> INFO: Start INN search by the site address autopiter.ru
+<11:31:32> INFO: Connecting to https://spark-interfax.ru/search?Query=autopiter.ru
+<11:31:33> WARN: Wrong site morozov@autopiter.ru
+<11:31:33> WARN: Wrong site buh@autopiter.ru
+<11:31:33> WARN: Few INN found: 7820045594 7820025407 
+<11:31:33> INFO: Search for the newest INN 
+<11:31:33> INFO: Connecting to https://sbis.ru/contragents/7820045594
+<11:31:34> INFO: Connecting to https://sbis.ru/contragents/7820025407
+<11:31:35> WARN: INN 7820025407 liquidated 
+<11:31:35> INFO: INN found: 7820045594 
+<11:31:35> INFO: Start parsing supplier info autopiter.ru
+<11:31:35> INFO: Connecting to https://sbis.ru/contragents/7820045594
+<11:31:36> INFO: Connecting to https://prom-kapital.ru/manzhety_shevronnye_rezinotkanevye_
+<11:31:37> INFO: Connecting to https://www.google.com/search?q=инн site%3Aprom-kapital.ru
+<11:31:38> INFO: Start INN search by the site address prom-kapital.ru
+<11:31:39> INFO: Connecting to https://spark-interfax.ru/search?Query=prom-kapital.ru
+<11:31:39> INFO: INN found: 3435105163 
+<11:31:39> INFO: Start parsing supplier info prom-kapital.ru
+<11:31:39> INFO: Connecting to https://sbis.ru/contragents/3435105163
+<11:31:40> INFO: Connecting to https://diselars.ru/autocatalog/spetstehnika/chsdm/pogruzchik_v_138_1122/gidrotsilindr__v138_43_03_000_01_-78
+<11:31:43> INFO: Connecting to https://www.google.com/search?q=инн site%3Adiselars.ru
+<11:31:44> INFO: Start INN search by the site address diselars.ru
+<11:31:45> INFO: Connecting to https://spark-interfax.ru/search?Query=diselars.ru
+<11:31:45> WARN: Few INN found: 7604286161 7602095299 7602042184 
+<11:31:45> INFO: Search for the newest INN 
+<11:31:45> INFO: Connecting to https://sbis.ru/contragents/7604286161
+<11:31:47> INFO: Connecting to https://sbis.ru/contragents/7602095299
+<11:31:49> WARN: INN 7602095299 liquidated 
+<11:31:49> INFO: Connecting to https://sbis.ru/contragents/7602042184
+<11:31:50> WARN: INN 7602042184 liquidated 
+<11:31:50> INFO: INN found: 7604286161 
+<11:31:50> INFO: Start parsing supplier info diselars.ru
+<11:31:50> INFO: Connecting to https://sbis.ru/contragents/7604286161
+<11:31:51> INFO: Connecting to https://impuls-ek.ru/catalog/shevronnye_uplotneniya_rezinotkanevye_manzhety/
+<11:31:52> INFO: Connecting to https://www.google.com/search?q=инн site%3Aimpuls-ek.ru
+<11:31:52> INFO: Start INN search by the site address impuls-ek.ru
+<11:31:53> INFO: Connecting to https://spark-interfax.ru/search?Query=impuls-ek.ru
+<11:31:54> WARN: Few INN found: 6670348122 6658304190 
+<11:31:54> INFO: Search for the newest INN 
+<11:31:54> INFO: Connecting to https://sbis.ru/contragents/6670348122
+<11:31:55> INFO: Connecting to https://sbis.ru/contragents/6658304190
+<11:31:55> WARN: INN 6658304190 liquidated 
+<11:31:55> INFO: INN found: 6670348122 
+<11:31:55> INFO: Start parsing supplier info impuls-ek.ru
+<11:31:55> INFO: Connecting to https://sbis.ru/contragents/6670348122
+----- Рукав газосварочный I-6,3-0,63-У ГОСТ 9356 -----
+<11:31:57> INFO: Connecting to https://www.google.com/search?q=Рукав газосварочный I-6,3-0,63-У ГОСТ 9356&start=00
+<11:31:57> INFO: Connecting to https://volgopromtrans.ru/catalog/rukava/rukav-gost-9356-75/rukav-i-6-3-0-63-gost-9356-75/
+<11:31:58> INFO: Connecting to https://www.google.com/search?q=инн site%3Avolgopromtrans.ru
+<11:31:59> INFO: Start INN search by the site address volgopromtrans.ru
+<11:32:00> INFO: Connecting to https://spark-interfax.ru/search?Query=volgopromtrans.ru
+<11:32:00> INFO: INN found: 3428082638 
+<11:32:00> INFO: Start parsing supplier info volgopromtrans.ru
+<11:32:00> INFO: Connecting to https://sbis.ru/contragents/3428082638
+<11:32:01> INFO: Connecting to https://gidroprom.com/rukav-gazosvarka.html
+<11:32:02> INFO: Connecting to https://www.google.com/search?q=инн site%3Agidroprom.com
+<11:32:03> INFO: Start INN search by the site address gidroprom.com
+<11:32:04> INFO: Connecting to https://spark-interfax.ru/search?Query=gidroprom.com
+<11:32:04> WARN: Wrong site info@gidroprom.com
+<11:32:04> FAIL: INN not found in database spark-interfax 
+<11:32:04> INFO: Connecting to https://hims.pro/product/rukav-dlya-gazovoy-svarki-i-6-3-0-63-propanovyy-gost-9356-75-szrt/
+<11:32:05> INFO: Connecting to https://www.google.com/search?q=инн site%3Ahims.pro
+<11:32:06> INFO: Start INN search by the site address hims.pro
+<11:32:07> INFO: Connecting to https://spark-interfax.ru/search?Query=hims.pro
+<11:32:07> WARN: Wrong site 111@hims.pro
+<11:32:07> FAIL: INN not found in database spark-interfax 
+<11:32:07> INFO: Connecting to https://www.rtiek.ru/catalog/rukava/rukava_dlya_gazovoj_svarki/1-63-063
+<11:32:08> INFO: Connecting to https://www.google.com/search?q=инн site%3Artiek.ru
+<11:32:09> INFO: Start INN search by the site address rtiek.ru
+<11:32:10> INFO: Connecting to https://spark-interfax.ru/search?Query=rtiek.ru
+<11:32:10> INFO: INN found: 6659198233 
+<11:32:10> INFO: Start parsing supplier info rtiek.ru
+<11:32:10> INFO: Connecting to https://sbis.ru/contragents/6659198233
+<11:32:12> WARN: Website in Blacklist https://docs.cntd.ru/document/1200012888
+<11:32:12> INFO: Connecting to https://www.pnevmoteh.ru/rukav-gazovyy-i-63-063-gost-9356-75
+<11:32:13> INFO: Connecting to https://www.google.com/search?q=инн site%3Apnevmoteh.ru
+<11:32:14> INFO: Start INN search by the site address pnevmoteh.ru
+<11:32:15> INFO: Connecting to https://spark-interfax.ru/search?Query=pnevmoteh.ru
+<11:32:16> INFO: INN found: 7724360875 
+<11:32:16> INFO: Start parsing supplier info pnevmoteh.ru
+<11:32:16> INFO: Connecting to https://sbis.ru/contragents/7724360875
+<11:32:16> INFO: Connecting to https://www.xn--80acehbr9abglfrc3e.xn--p1ai/catalog/239568-gazosvarochnoye_oborudovaniye
+<11:32:17> INFO: Connecting to https://www.google.com/search?q=инн site%3Axn--80acehbr9abglfrc3e.xn--p1ai
+<11:32:18> INFO: Start INN search by the site address xn--80acehbr9abglfrc3e.xn--p1ai
+<11:32:19> INFO: Connecting to https://spark-interfax.ru/search?Query=xn--80acehbr9abglfrc3e.xn--p1ai
+<11:32:19> FAIL: INN not found in database spark-interfax 
+<11:32:19> INFO: Connecting to https://www.promresurs.ru/catalog/rukava_dlya_gazovoy_svarki_gost_9356_75_/rukav_i_6_3_0_63/
+<11:32:20> INFO: Connecting to https://www.google.com/search?q=инн site%3Apromresurs.ru
+<11:32:21> INFO: Start INN search by the site address promresurs.ru
+<11:32:22> INFO: Connecting to https://spark-interfax.ru/search?Query=promresurs.ru
+<11:32:22> WARN: Few INN found: 5047162920 5008038189 5008037185 
+<11:32:22> INFO: Search for the newest INN 
+<11:32:22> INFO: Connecting to https://sbis.ru/contragents/5047162920
+<11:32:24> INFO: Connecting to https://sbis.ru/contragents/5008038189
+<11:32:25> WARN: INN 5008038189 liquidated 
+<11:32:25> INFO: Connecting to https://sbis.ru/contragents/5008037185
+<11:32:27> WARN: INN 5008037185 liquidated 
+<11:32:27> INFO: INN found: 5047162920 
+<11:32:27> INFO: Start parsing supplier info promresurs.ru
+<11:32:27> INFO: Connecting to https://sbis.ru/contragents/5047162920
+<11:32:28> INFO: Connecting to https://rti-service.ru/shop/raznoe/rukava/rukava-dlya-gazovoj-svarki/rukav-i-63-063-dlya-gazosvarki-gost-9356-75-m/
+<11:32:29> INFO: Connecting to https://www.google.com/search?q=инн site%3Arti-service.ru
+<11:32:30> INFO: Start INN search by the site address rti-service.ru
+<11:32:31> INFO: Connecting to https://spark-interfax.ru/search?Query=rti-service.ru
+<11:32:31> FAIL: INN not found in database spark-interfax 
+<11:32:31> INFO: Connecting to https://www.zavod-rtiek.ru/goods/152642679-rukav_naporny_rezinovy_s_textilnym_karkasom_gost_18698_79_b_16_27_1_0
+<11:32:33> INFO: Connecting to https://www.google.com/search?q=инн site%3Azavod-rtiek.ru
+<11:32:34> INFO: Start INN search by the site address zavod-rtiek.ru
+<11:32:35> INFO: Connecting to https://spark-interfax.ru/search?Query=zavod-rtiek.ru
+<11:32:35> INFO: INN found: 6659198233 
+<11:32:35> INFO: Start parsing supplier info zavod-rtiek.ru
+<11:32:35> INFO: Connecting to https://sbis.ru/contragents/6659198233
+<11:32:36> INFO: Connecting to https://www.google.com/search?q=Рукав газосварочный I-6,3-0,63-У ГОСТ 9356&start=10
+<11:32:37> INFO: Connecting to https://www.pulscen.ru/price/051606-rukava-gazovye/f:31221_6-tochka-3-mm
+<11:32:39> INFO: Connecting to https://www.google.com/search?q=инн site%3Apulscen.ru
+<11:32:40> INFO: Start INN search by the site address pulscen.ru
+<11:32:41> INFO: Connecting to https://spark-interfax.ru/search?Query=pulscen.ru
+<11:32:42> WARN: Wrong site gcck.pulscen.ru
+<11:32:42> WARN: Wrong site himservise.pulscen.ru
+<11:32:42> WARN: Wrong site msk.pulscen.ru/firms/98700391
+<11:32:42> WARN: Wrong site www.eltrans.pulscen.ru
+<11:32:42> WARN: Wrong site integral-gsm.pulscen.ru
+<11:32:42> WARN: Wrong site oooaerovent.pulscen.ru
+<11:32:42> WARN: Wrong site stroy-ogneupor.pulscen.ru
+<11:32:42> WARN: Wrong site www.aroma-ingradients.pulscen.ru
+<11:32:42> WARN: Wrong site tochpribor-kb.pulscen.ru
+<11:32:42> INFO: INN found: 6664071183 
+<11:32:42> INFO: Start parsing supplier info pulscen.ru
+<11:32:42> INFO: Connecting to https://sbis.ru/contragents/6664071183
+<11:32:42> INFO: Connecting to https://e-rti.ru/products/rukava-rezinovye/rukava-dlya-gazovoy-svarki-gost-9356-75/
+<11:32:43> WARN: Website is not a market https://e-rti.ru/products/rukava-rezinovye/rukava-dlya-gazovoy-svarki-gost-9356-75/
+<11:32:43> INFO: Connecting to https://tiu.ru/Rukav-gazosvarochnyj-6.html
+<11:32:43> WARN: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='tiu.ru', port=443): Max retries exceeded with url: /Rukav-gazosvarochnyj-6.html (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000023C31010F40>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))")) Failed connect to https://tiu.ru/Rukav-gazosvarochnyj-6.html
+<11:32:43> INFO: Reconnecting to https://tiu.ru/Rukav-gazosvarochnyj-6.html
+<11:32:43> FAIL: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='tiu.ru', port=443): Max retries exceeded with url: /Rukav-gazosvarochnyj-6.html (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000023C310114E0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))")) Not connected to https://tiu.ru/Rukav-gazosvarochnyj-6.html
+<11:32:43> INFO: Connecting to https://xn----8sbn6afubnnd.xn--p1ai/rukava_i_shlangi/rukav_svarochnyy_gost_9356_75/
+<11:32:44> INFO: Connecting to https://www.google.com/search?q=инн site%3Axn----8sbn6afubnnd.xn--p1ai
+<11:32:45> INFO: Start INN search by the site address xn----8sbn6afubnnd.xn--p1ai
+<11:32:46> INFO: Connecting to https://spark-interfax.ru/search?Query=xn----8sbn6afubnnd.xn--p1ai
+<11:32:47> FAIL: INN not found in database spark-interfax 
+<11:32:47> INFO: Connecting to https://furniturka.su/goods/rukav-i-6-3-0-63-dlya-gazosvarki-gost-9356-75
+<11:32:48> INFO: Connecting to https://www.google.com/search?q=инн site%3Afurniturka.su
+<11:32:49> INFO: Start INN search by the site address furniturka.su
+<11:32:50> INFO: Connecting to https://spark-interfax.ru/search?Query=furniturka.su
+<11:32:50> FAIL: INN not found in database spark-interfax 
+<11:32:50> INFO: Connecting to https://www.rezina-snab.ru/goods/207183266-rukav_ii_9_0_63_u_gost_9356_75
+<11:32:51> INFO: Connecting to https://www.google.com/search?q=инн site%3Arezina-snab.ru
+<11:32:52> INFO: Start INN search by the site address rezina-snab.ru
+<11:32:53> INFO: Connecting to https://spark-interfax.ru/search?Query=rezina-snab.ru
+<11:32:53> INFO: INN found: 7805508618 
+<11:32:53> INFO: Start parsing supplier info rezina-snab.ru
+<11:32:53> INFO: Connecting to https://sbis.ru/contragents/7805508618
+<11:32:55> INFO: Connecting to https://www.svarbi.ru/cat/svarochnye-rukava-gazovye/
+<11:33:01> INFO: Connecting to https://www.google.com/search?q=инн site%3Asvarbi.ru
+<11:33:02> INFO: Start INN search by the site address svarbi.ru
+<11:33:03> INFO: Connecting to https://spark-interfax.ru/search?Query=svarbi.ru
+<11:33:04> WARN: Wrong site pmv@svarbi.ru
+<11:33:04> WARN: Wrong site vrn@svarbi.ru
+<11:33:04> INFO: INN found: 7726307154 
+<11:33:04> INFO: Start parsing supplier info svarbi.ru
+<11:33:04> INFO: Connecting to https://sbis.ru/contragents/7726307154
+<11:33:06> INFO: Connecting to https://www.usk-2007.ru/catalog/k-5865362-rukava_gazosvarochnyye_gost_9356_75
+<11:33:08> INFO: Connecting to https://www.google.com/search?q=инн site%3Ausk-2007.ru
+<11:33:08> INFO: Start INN search by the site address usk-2007.ru
+<11:33:09> INFO: Connecting to https://spark-interfax.ru/search?Query=usk-2007.ru
+<11:33:10> INFO: INN found: 6674220162 
+<11:33:10> INFO: Start parsing supplier info usk-2007.ru
+<11:33:10> INFO: Connecting to https://sbis.ru/contragents/6674220162
+<11:33:11> INFO: Connecting to https://rizar.ru/catalog/rukava/rukava_dlya_gazovoy_svarki/rukav_i_6_3_0_63_gost_9356_75_szrt/
+<11:33:12> INFO: Connecting to https://www.google.com/search?q=инн site%3Arizar.ru
+<11:33:13> INFO: Start INN search by the site address rizar.ru
+<11:33:14> INFO: Connecting to https://spark-interfax.ru/search?Query=rizar.ru
+<11:33:14> INFO: INN found: 3435304715 
+<11:33:14> INFO: Start parsing supplier info rizar.ru
+<11:33:14> INFO: Connecting to https://sbis.ru/contragents/3435304715
+<11:33:15> INFO: Connecting to https://cheboksary.pulscen.ru/price/051606-rukava-gazovye
+<11:33:17> INFO: Connecting to https://www.google.com/search?q=инн site%3Acheboksary.pulscen.ru
+<11:33:18> INFO: Start INN search by the site address cheboksary.pulscen.ru
+<11:33:19> INFO: Connecting to https://spark-interfax.ru/search?Query=cheboksary.pulscen.ru
+<11:33:19> FAIL: INN not found in database spark-interfax 
+<11:33:19> INFO: Connecting to https://www.google.com/search?q=Рукав газосварочный I-6,3-0,63-У ГОСТ 9356&start=20
+<11:33:20> INFO: Connecting to https://profsvarka.net/p482433726-rukav-063-mpa.html
+<11:33:22> WARN: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='profsvarka.net', port=443): Max retries exceeded with url: /p482433726-rukav-063-mpa.html (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000023C35795000>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))")) Failed connect to https://profsvarka.net/p482433726-rukav-063-mpa.html
+<11:33:22> INFO: Reconnecting to https://profsvarka.net/p482433726-rukav-063-mpa.html
+<11:33:24> FAIL: ConnectionError(MaxRetryError("HTTPSConnectionPool(host='profsvarka.net', port=443): Max retries exceeded with url: /p482433726-rukav-063-mpa.html (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x0000023C357957B0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))")) Not connected to https://profsvarka.net/p482433726-rukav-063-mpa.html
+<11:33:24> INFO: Connecting to https://kazvek.com/physical_product/1350558-rukav-rezinovyy-dlya-gazovoy-svarki-i-rezki-metallov-i-63-063-u-gost-9356-75-propan.html
+<11:33:25> INFO: Connecting to https://www.google.com/search?q=инн site%3Akazvek.com
+<11:33:26> INFO: Start INN search by the site address kazvek.com
+<11:33:27> INFO: Connecting to https://spark-interfax.ru/search?Query=kazvek.com
+<11:33:28> FAIL: INN not found in database spark-interfax 
+<11:33:28> INFO: Connecting to https://ural-recom.ru/p22199665-rukav-gazosvarochnyj-063.html
+<11:33:28> WARN: SSLError(MaxRetryError('HTTPSConnectionPool(host=\'ural-recom.ru\', port=443): Max retries exceeded with url: /p22199665-rukav-gazosvarochnyj-063.html (Caused by SSLError(CertificateError("hostname \'ural-recom.ru\' doesn\'t match either of \'*.kartoteka.ru\', \'kartoteka.ru\'")))')) Failed connect to https://ural-recom.ru/p22199665-rukav-gazosvarochnyj-063.html
+<11:33:28> INFO: Reconnecting to https://ural-recom.ru/p22199665-rukav-gazosvarochnyj-063.html
+<11:33:28> WARN: Website is not a market https://ural-recom.ru/p22199665-rukav-gazosvarochnyj-063.html
+<11:33:28> INFO: Connecting to https://texnoprofsnabrti.ru/rukava-gost-9356-75-dlya-gazovoj-svarki/Rukav-I-6,3-0,63-GOST-9356-75
+<11:33:29> INFO: Connecting to https://www.google.com/search?q=инн site%3Atexnoprofsnabrti.ru
+<11:33:30> INFO: Start INN search by the site address texnoprofsnabrti.ru
+<11:33:31> INFO: Connecting to https://spark-interfax.ru/search?Query=texnoprofsnabrti.ru
+<11:33:31> INFO: INN found: 6451004778 
+<11:33:31> INFO: Start parsing supplier info texnoprofsnabrti.ru
+<11:33:31> INFO: Connecting to https://sbis.ru/contragents/6451004778
+<11:33:32> INFO: Connecting to http://www.deot.biz/catalog/rukava_gazosvarochnye/rukav_atsetilenovyy_i_6_3_0_63_gost_9356_75_volgopromtrans/
+<11:33:34> INFO: Connecting to https://www.google.com/search?q=инн site%3Adeot.biz
+<11:33:35> INFO: Start INN search by the site address deot.biz
+<11:33:36> INFO: Connecting to https://spark-interfax.ru/search?Query=deot.biz
+<11:33:37> FAIL: INN not found in database spark-interfax 
+<11:33:37> INFO: Connecting to https://cin.ru/opisanie/opisanie-rukava-dlya-gazovoy-svarki-gost-9356-75/
+<11:33:37> INFO: Connecting to https://www.google.com/search?q=инн site%3Acin.ru
+<11:33:38> INFO: Start INN search by the site address cin.ru
+<11:33:39> INFO: Connecting to https://spark-interfax.ru/search?Query=cin.ru
+<11:33:40> WARN: Wrong site ch@cin.ru
+<11:33:40> INFO: INN found: 5027011263 
+<11:33:40> INFO: Start parsing supplier info cin.ru
+<11:33:40> INFO: Connecting to https://sbis.ru/contragents/5027011263
+<11:33:42> INFO: Connecting to https://rti-express.ru/tovary_i_uslugi/rukava_napornye/rukava-napornye-gazosvarochnye-po-gostu-9356-75/rukav-i-6-3-0-63-u-gost-9356-75/
+<11:33:43> INFO: Connecting to https://www.google.com/search?q=инн site%3Arti-express.ru
+<11:33:44> INFO: Start INN search by the site address rti-express.ru
+<11:33:45> INFO: Connecting to https://spark-interfax.ru/search?Query=rti-express.ru
+<11:33:45> INFO: INN found: 7805508618 
+<11:33:45> INFO: Start parsing supplier info rti-express.ru
+<11:33:45> INFO: Connecting to https://sbis.ru/contragents/7805508618
+<11:33:46> INFO: Connecting to https://agrovektor.ru/profile/view/u/17732/part/products/folder/rukava-rezinovye-dlya-gazovoy-svarki-i-rezki-metallov-gost-9356-75-3.html
+<11:33:46> INFO: Connecting to https://www.google.com/search?q=инн site%3Aagrovektor.ru
+<11:33:47> INFO: Start INN search by the site address agrovektor.ru
+<11:33:48> INFO: Connecting to https://spark-interfax.ru/search?Query=agrovektor.ru
+<11:33:49> INFO: INN found: 6221002705 
+<11:33:49> INFO: Start parsing supplier info agrovektor.ru
+<11:33:49> INFO: Connecting to https://sbis.ru/contragents/6221002705
+<11:33:50> FAIL: Supplier liquidated! 
+<11:33:50> INFO: Connecting to https://www.farpost.ru/khabarovsk/home/tools/rukav-propanovyj-acetilenovyj-tip-i-6-3-0-63-gost-9356-75-rubikon-2-g7926411803.html
+<11:33:51> INFO: Connecting to https://www.google.com/search?q=инн site%3Afarpost.ru
+<11:33:52> INFO: Start INN search by the site address farpost.ru
+<11:33:53> INFO: Connecting to https://spark-interfax.ru/search?Query=farpost.ru
+<11:33:53> WARN: Wrong site kit@farpost.ru
+<11:33:53> FAIL: INN not found in database spark-interfax 
+<11:33:53> INFO: Connecting to https://tooboo.ru/p482334951-rukav-gazosvarochnyj-iii.html
+<11:33:54> WARN: SSLError(MaxRetryError('HTTPSConnectionPool(host=\'tooboo.ru\', port=443): Max retries exceeded with url: /p482334951-rukav-gazosvarochnyj-iii.html (Caused by SSLError(CertificateError("hostname \'tooboo.ru\' doesn\'t match either of \'*.kartoteka.ru\', \'kartoteka.ru\'")))')) Failed connect to https://tooboo.ru/p482334951-rukav-gazosvarochnyj-iii.html
+<11:33:54> INFO: Reconnecting to https://tooboo.ru/p482334951-rukav-gazosvarochnyj-iii.html
+<11:33:54> WARN: Website is not a market https://tooboo.ru/p482334951-rukav-gazosvarochnyj-iii.html
+----- Гвоздь строительный круглый головка плоская 3х80 ГОСТ 4028 -----
+<11:33:54> INFO: Connecting to https://www.google.com/search?q=Гвоздь строительный круглый головка плоская 3х80 ГОСТ 4028&start=00
+<11:33:55> WARN: .pdf file not a website https://1001krep.ru/f/gost_4028-63_bp_gvozd_stroitelnyj_s_konicheskoj_golovkoj_pdf.pdf
+<11:33:55> INFO: Connecting to https://uniform-met.ru/catalog/metizy/gvozdi/stroitelnye-gvozdi-gost-4028-63/
+<11:33:56> INFO: Connecting to https://www.google.com/search?q=инн site%3Auniform-met.ru
+<11:33:57> INFO: Start INN search by the site address uniform-met.ru
+<11:33:58> INFO: Connecting to https://spark-interfax.ru/search?Query=uniform-met.ru
+<11:33:58> WARN: Few INN found: 7723397262 7727415392 
+<11:33:58> INFO: Search for the newest INN 
+<11:33:58> INFO: Connecting to https://sbis.ru/contragents/7723397262
+<11:33:59> INFO: Connecting to https://sbis.ru/contragents/7727415392
+<11:33:59> INFO: INN found: 7727415392 
+<11:33:59> INFO: Start parsing supplier info uniform-met.ru
+<11:33:59> INFO: Connecting to https://sbis.ru/contragents/7727415392
+<11:34:00> INFO: Connecting to https://letfix.ru/shop/fasteners/metal_nail/gvodz_stroitelniy_3-5x80.html
+<11:34:01> INFO: Connecting to https://www.google.com/search?q=инн site%3Aletfix.ru
+<11:34:02> INFO: Start INN search by the site address letfix.ru
+<11:34:03> INFO: Connecting to https://spark-interfax.ru/search?Query=letfix.ru
+<11:34:04> INFO: INN found: 7839435510 
+<11:34:04> INFO: Start parsing supplier info letfix.ru
+<11:34:04> INFO: Connecting to https://sbis.ru/contragents/7839435510
+<11:34:04> WARN: Website in Blacklist https://docs.cntd.ru/document/1200004058
+<11:34:04> INFO: Connecting to https://xn--90aibchjc2ankc9k.xn--p1ai/raznoe/gvozdi-stroitelnye-razmery-gvozdi-stroitelnye-gost-4028-63-i-4028-80-proizvodstvo-i-prodazha-optom-kupit-po-vygodnym-czenam.html
+<11:34:05> INFO: Connecting to https://www.google.com/search?q=инн site%3Axn--90aibchjc2ankc9k.xn--p1ai
+<11:34:06> INFO: Start INN search by the site address xn--90aibchjc2ankc9k.xn--p1ai
+<11:34:07> INFO: Connecting to https://spark-interfax.ru/search?Query=xn--90aibchjc2ankc9k.xn--p1ai
+<11:34:07> FAIL: INN not found in database spark-interfax 
+<11:34:07> INFO: Connecting to https://magaz-in.pro/gvozdi/gvozdi-chernye/gvozdi-stroitelnye-gost-4028-63
+<11:34:09> INFO: Connecting to https://www.google.com/search?q=инн site%3Amagaz-in.pro
+<11:34:10> INFO: Start INN search by the site address magaz-in.pro
+<11:34:11> INFO: Connecting to https://spark-interfax.ru/search?Query=magaz-in.pro
+<11:34:12> INFO: INN found: 7811547990 
+<11:34:12> INFO: Start parsing supplier info magaz-in.pro
+<11:34:12> INFO: Connecting to https://sbis.ru/contragents/7811547990
+<11:34:12> INFO: Connecting to https://kd-nn.ru/shop/product/87682803
+<11:34:13> INFO: Connecting to https://www.google.com/search?q=инн site%3Akd-nn.ru
+<11:34:14> INFO: Start INN search by the site address kd-nn.ru
+<11:34:15> INFO: Connecting to https://spark-interfax.ru/search?Query=kd-nn.ru
+<11:34:15> FAIL: INN not found in database spark-interfax 
+<11:34:15> INFO: Connecting to https://fischer-market.ru/gvozd-gost-4028-20
+<11:34:16> INFO: Connecting to https://www.google.com/search?q=инн site%3Afischer-market.ru
+<11:34:17> INFO: Start INN search by the site address fischer-market.ru
+<11:34:18> INFO: Connecting to https://spark-interfax.ru/search?Query=fischer-market.ru
+<11:34:18> FAIL: INN not found in database spark-interfax 
+<11:34:18> INFO: Connecting to http://stroitelnye-materialy-v-saratove.ru/stroymaterialyi/krepej/gvozdi/gvozdi_stroitelnyie
+<11:34:19> INFO: Connecting to https://www.google.com/search?q=инн site%3Astroitelnye-materialy-v-saratove.ru
+<11:34:19> INFO: Start INN search by the site address stroitelnye-materialy-v-saratove.ru
+<11:34:20> INFO: Connecting to https://spark-interfax.ru/search?Query=stroitelnye-materialy-v-saratove.ru
+<11:34:21> FAIL: INN not found in database spark-interfax 
+<11:34:21> INFO: Connecting to https://www.google.com/search?q=Гвоздь строительный круглый головка плоская 3х80 ГОСТ 4028&start=10
+<11:34:22> INFO: Connecting to https://misterprof.ru/catalog/gvozdi_1/gvozd_stroitelnyy_3kh70_mm_1_kg/
+<11:34:23> WARN: GOST not found https://misterprof.ru/catalog/gvozdi_1/gvozd_stroitelnyy_3kh70_mm_1_kg/
+<11:34:23> INFO: Connecting to https://stavnistavim.ru/stroit/stroitelnye-gvozdi-razmery-razmery-gvozdej-polnaya-tablica-razmery-info-40-50-60-70-80-90-100-120-150-200-14-178-326-2004.html
+<11:34:24> INFO: Connecting to https://www.google.com/search?q=инн site%3Astavnistavim.ru
+<11:34:25> INFO: Start INN search by the site address stavnistavim.ru
+<11:34:26> INFO: Connecting to https://spark-interfax.ru/search?Query=stavnistavim.ru
+<11:34:26> FAIL: INN not found in database spark-interfax 
+<11:34:26> INFO: Connecting to https://letfix.ru/shop/fasteners/metal_nail/gvozdi_7811-7075_zn.html
+<11:34:31> INFO: Connecting to https://www.google.com/search?q=инн site%3Aletfix.ru
+<11:34:31> INFO: Start INN search by the site address letfix.ru
+<11:34:32> INFO: Connecting to https://spark-interfax.ru/search?Query=letfix.ru
+<11:34:32> INFO: INN found: 7839435510 
+<11:34:32> INFO: Start parsing supplier info letfix.ru
+<11:34:32> INFO: Connecting to https://sbis.ru/contragents/7839435510
+<11:34:33> INFO: Connecting to https://yavitrina.ru/gvozdi-kruglye
+<11:34:34> INFO: Connecting to https://www.google.com/search?q=инн site%3Ayavitrina.ru
+<11:34:35> INFO: Start INN search by the site address yavitrina.ru
+<11:34:36> INFO: Connecting to https://spark-interfax.ru/search?Query=yavitrina.ru
+<11:34:36> FAIL: INN not found in database spark-interfax 
+<11:34:36> INFO: Connecting to https://xn----7sbbnf4acenkch8bl9k.xn--p1ai/raznoe/stroitelnye-gvozdi-razmery-gvozdi-stroitelnye-gost-4028-63-i-4028-80-proizvodstvo-i-prodazha-optom-kupit-po-vygodnym-czenam.html
+<11:34:36> INFO: Connecting to https://www.google.com/search?q=инн site%3Axn----7sbbnf4acenkch8bl9k.xn--p1ai
+<11:34:37> INFO: Start INN search by the site address xn----7sbbnf4acenkch8bl9k.xn--p1ai
+<11:34:38> INFO: Connecting to https://spark-interfax.ru/search?Query=xn----7sbbnf4acenkch8bl9k.xn--p1ai
+<11:34:39> FAIL: INN not found in database spark-interfax 
+<11:34:39> INFO: Connecting to https://stankotec.ru/raznoe-2/ves-stroitelnyx-gvozdej-massa-gvozdej-spravochnik-massy.html
+<11:34:39> WARN: ConnectionError(ProtocolError('Connection aborted.', ConnectionResetError(10054, 'Удаленный хост принудительно разорвал существующее подключение', None, 10054, None))) Failed connect to https://stankotec.ru/raznoe-2/ves-stroitelnyx-gvozdej-massa-gvozdej-spravochnik-massy.html
+<11:34:39> INFO: Reconnecting to https://stankotec.ru/raznoe-2/ves-stroitelnyx-gvozdej-massa-gvozdej-spravochnik-massy.html
+<11:34:39> FAIL: ConnectionError(ProtocolError('Connection aborted.', ConnectionResetError(10054, 'Удаленный хост принудительно разорвал существующее подключение', None, 10054, None))) Not connected to https://stankotec.ru/raznoe-2/ves-stroitelnyx-gvozdej-massa-gvozdej-spravochnik-massy.html
+<11:34:39> INFO: Connecting to https://metal-shop.com.ua/category/gvozdi/gvozd-stroitelny/
+<11:34:40> INFO: Connecting to https://www.google.com/search?q=инн site%3Ametal-shop.com.ua
+<11:34:40> INFO: Start INN search by the site address metal-shop.com.ua
+<11:34:41> INFO: Connecting to https://spark-interfax.ru/search?Query=metal-shop.com.ua
+<11:34:42> FAIL: INN not found in database spark-interfax 
+<11:34:42> INFO: Connecting to https://www.google.com/search?q=Гвоздь строительный круглый головка плоская 3х80 ГОСТ 4028&start=20
+Completed successfully, elapsed time 0:04:52.553980
